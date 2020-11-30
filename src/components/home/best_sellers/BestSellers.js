@@ -1,9 +1,9 @@
 import React from 'react';
 
-const Best_sellers = () => {
+const BestSellers = () => {
     return (
         <h1>Best Sellers</h1>
     )
 };
 
-export default Best_sellers;
+export default BestSellers;
