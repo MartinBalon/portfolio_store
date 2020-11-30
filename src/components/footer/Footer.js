@@ -30,6 +30,7 @@ const Footer = () => {
                 </div>
                 <div>Pixels</div>
             </div>
+            
         </footer>
     )
 };

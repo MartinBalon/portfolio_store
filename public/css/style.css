@@ -47,3 +47,124 @@ table {
 	border-spacing: 0;
 }
 
+/*
+ * CSS By Martin Balon
+ */
+
+/* Generel Rules */
+html, body, #root, #container {
+	min-height: 100% !important;
+    height: 100%;
+}
+
+.desktop, .hidden {
+	display: none;
+}
+
+* {
+	box-sizing: border-box;
+	color: rgb(50, 50, 50);
+}
+
+a {
+	text-decoration: none;
+}
+
+/* HEADER */
+header {
+	height: 60px;
+	padding: 0 2.5%;
+	position: fixed;
+	z-index: 99;
+	width: 100%;
+	background-color: white;
+	box-shadow: 0px 0px 10px 1px rgba(40, 40, 40, 0.5);
+	-webkit-box-shadow: 0px 0px 10px 1px rgba(40, 40, 40, 0.5);
+	-moz-box-shadow: 0px 0px 10px 1px rgba(40, 40, 40, 0.5);
+}
+
+#company_logo {
+	width: 80px;
+	height: 100%;
+	padding-top: 7px;
+	float: left;
+}
+
+#company_logo h1 {
+	font-size: 30px;
+}
+
+#shopping_cart {
+	width: 130px;
+	float: right;
+}
+
+#shopping_cart div:hover {
+	cursor: pointer;
+}
+
+#shopping_cart img {
+	width: 24px;
+	padding-top: 8px;
+	margin-right: 5px;
+}
+
+#shopping_cart div:first-child {
+	height: 40px;
+}
+
+#shopping_cart div:nth-child(2) {
+	height: 20px;
+	font-size: 0.8em;
+}
+
+#phone_menu_logo {
+	width: 50px;
+	padding: 17px 0 17px 2.5%; /* 2.5% left padding to match padding of the header */
+	float: right;
+	border-left: 1px solid rgba(40, 40, 40, 0.1);
+}
+
+#phone_menu_logo div {
+	height: 6px;
+	margin-bottom: 4px;
+	background-color: rgb(180, 50, 50);
+	border-radius: 5px;
+}
+
+#phone_menu_logo div:nth-child(3) {
+	margin-bottom: 0;
+}
+
+/* FOOTER */
+footer {
+	position: fixed;
+	z-index: 1;
+	bottom: 0;
+	background: rgb(50, 50, 50);
+	width: 100%;
+}
+
+footer a {
+	color:  rgb(200, 200, 200);
+}
+
+/*
+ ******************************** PAGES STYLE ********************************
+ */
+
+/* HOME PAGE */
+#container {
+	padding-top: 60px;
+	position: relative;
+	z-index: 2;
+}
+
+/* CAROUSEL */
+#carousel {
+	height: 80%;
+	width: 100%;
+}
+
+
+

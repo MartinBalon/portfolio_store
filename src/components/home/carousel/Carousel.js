@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
+import CarouselContent from './CarouselContent';
 
 const Carousel = () => {
     return (
-        <h1>Carousel</h1>
+        <div id="carousel">
+            <CarouselContent translate={150} />
+        </div>
     )
 };
 

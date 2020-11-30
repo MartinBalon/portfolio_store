@@ -6,12 +6,12 @@ import Reviews from './reviews/Reviews.js';
 
 const Home = () => {
     return (
-        <>
+        <div id="container">
             <Carousel />
             <BestSellers />
             <Artists />
             <Reviews />
-        </>
+        </div>
     )
 };
 
