@@ -164,7 +164,33 @@ footer a {
 #carousel {
 	height: 80%;
 	width: 100%;
+	position: relative;
+	overflow: hidden;
 }
 
+#carousel img, #circles {
+	position: absolute;
+	z-index: 99;
+}
 
+#arrow_left, #arrow_right {
+	top: 50%;
+	cursor: pointer;
+}
+
+#arrow_left {
+	left: 5%;
+}
+
+#arrow_right {
+	right: 5%;	
+}
+
+.slide {
+	height: 100%;
+	width: 100%;
+	position: absolute;
+	top: 0%;
+	z-index: 3;
+}
 
