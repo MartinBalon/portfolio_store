@@ -73,7 +73,7 @@ a {
 /* HEADER */
 header {
 	height: 60px;
-	padding: 0 2.5%;
+	padding: 0 10px;
 	position: fixed;
 	z-index: 99;
 	width: 100%;
@@ -120,7 +120,7 @@ header {
 
 #phone_menu_logo {
 	width: 50px;
-	padding: 17px 0 17px 2.5%; /* 2.5% left padding to match padding of the header */
+	padding: 17px 0 17px 10px; /* 2.5% left padding to match padding of the header */
 	float: right;
 	border-left: 1px solid rgba(40, 40, 40, 0.1);
 }
@@ -192,5 +192,33 @@ footer a {
 	position: absolute;
 	top: 0%;
 	z-index: 3;
+}
+
+#circles {
+	bottom: 5%;
+	width: 100%;
+}
+
+#circles_container {
+	height: 15px;
+	width: 75px;
+	margin: 0 auto;
+}
+
+.circle {
+	width: 15px;
+	height: 15px;
+	border: 2px solid white;
+	border-radius: 50%;
+	float: left;
+	margin-right: 5px;
+}
+
+.circle:last-child {
+	margin-right: 0;
+}
+
+.circle_active {
+	background-color: white;
 }
 
