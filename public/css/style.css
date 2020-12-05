@@ -173,17 +173,23 @@ footer a {
 	z-index: 99;
 }
 
+#carousel .slideImg {
+	position: relative;
+}
+
 #arrow_left, #arrow_right {
 	top: 50%;
 	cursor: pointer;
+	width: 25px;
+	height: 25px;
 }
 
 #arrow_left {
-	left: 5%;
+	left: 10px;
 }
 
 #arrow_right {
-	right: 5%;	
+	right: 10px;	
 }
 
 .slide {
@@ -195,20 +201,20 @@ footer a {
 }
 
 #circles {
-	bottom: 5%;
+	bottom: 10px;
 	width: 100%;
 }
 
 #circles_container {
 	height: 15px;
-	width: 75px;
+	width: 63px;
 	margin: 0 auto;
 }
 
 .circle {
-	width: 15px;
-	height: 15px;
-	border: 2px solid white;
+	width: 12px;
+	height: 12px;
+	border: 1px solid rgb(220, 220, 220);
 	border-radius: 50%;
 	float: left;
 	margin-right: 5px;
@@ -219,6 +225,38 @@ footer a {
 }
 
 .circle_active {
-	background-color: white;
+	background-color: rgb(220, 220, 220);
 }
 
+.slide h1 {
+	text-align: center;
+}
+
+.slide p {
+	text-align: left;
+	font-size: 0.9em;
+}
+
+.slide {
+	text-align: center;
+	padding: 40px; /* 10px (position of arrows) + 25px width of arrows = 5px actual padding */
+	padding-top: 10px;
+	background-color: rgb(40, 40, 40);
+}
+
+.slide a {
+	font-size: 0.9em;
+	display: inline-block;
+	background-color: red;
+	color: white;
+	padding: 4px 8px;
+	border-radius: 10px;
+}
+
+.slideImg, .slide a {
+	margin: 5% auto;
+}
+
+.slideImg {
+	width: 100%;
+}

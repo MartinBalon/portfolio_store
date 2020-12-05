@@ -30,7 +30,7 @@ const Footer = () => {
                 </div>
                 <div>Pixels</div>
             </div>
-            
+            <a href='https://www.freepik.com/vectors/infographic'>Infographic vector created by freepik - www.freepik.com</a>
         </footer>
     )
 };

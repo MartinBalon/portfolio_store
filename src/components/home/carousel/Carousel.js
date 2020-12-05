@@ -1,40 +1,12 @@
-import React, { useState } from 'react';
-
-const slides = [
-    {
-        id: 1,
-        color: 'white',
-        backgroundColor: 'grey',
-        h1: 'First Slide',
-        p: 'This is first slide'
-    }, 
-    {
-        id: 2,
-        color: 'black',
-        backgroundColor: 'white',
-        h1: 'Second Slide',
-        p: 'This is second slide'
-    },
-    {
-        id: 3,
-        color: 'green',
-        backgroundColor: 'pink',
-        h1: 'Third Slide',
-        p: 'This is third slide'
-    },
-    {
-        id: 4,
-        color: 'yellow',
-        backgroundColor: 'blue',
-        h1: 'Fourth Slide',
-        p: 'This is fourth slide'
-    }
-];
+import React from 'react';
+import slides from './CarouselData';
 
 let currentSlideId = slides.length;
+let circleId = 1;
+const windowWidth = window.innerWidth;
 
 const changeSlide = (direction) => {
-    if (direction === 'right') {
+    if (direction === 'left') {
         // move other slides 'behind the scene' so we can slide them from left to right again
         for(let i = 1; i < slides.length + 1; i++) {
             if (i !== currentSlideId && i !== (currentSlideId + 1)) {
@@ -50,7 +22,14 @@ const changeSlide = (direction) => {
             currentSlideId--; 
         }
         // slide next slide to the screen
-        moveSlide(currentSlideId, -100, 100, 3, 0.5);  
+        moveSlide(currentSlideId, -100, 100, 3, 0.5);
+        // update circles
+        if (circleId === slides.length) {
+            circleId = 1;
+        } else {
+            circleId++;
+        }
+        changeCircle(circleId);  
     } else {
         // move other slides 'behind the scene' so we can slide them from right to left again
         for(let i = 1; i < slides.length + 1; i++) {
@@ -67,8 +46,27 @@ const changeSlide = (direction) => {
             currentSlideId++; 
         }
         // slide next slide to the screen
-        moveSlide(currentSlideId, 100, -100, 3, 0.5); 
+        moveSlide(currentSlideId, 100, -100, 3, 0.5);
+        // update circles
+        if (circleId === 1) {
+            circleId = slides.length;
+        } else {
+            circleId--;
+        }
+        changeCircle(circleId);   
     }      
+};
+
+const changeCircle = (slideId) => {
+    const circles = document.getElementsByClassName('circle');
+    const circleId = `circle${slideId}`;
+    for(let i = 0; i < circles.length; i++) {
+        if (circleId === circles[i].id) {
+            circles[i].classList.add('circle_active');
+        } else if(circles[i].classList.contains('circle_active')) {
+            circles[i].classList.remove('circle_active');
+        }   
+    }
 };
 
 const moveSlide = (elementId, leftPercent, translatePercent, zindex, timing) => {
@@ -79,11 +77,12 @@ const moveSlide = (elementId, leftPercent, translatePercent, zindex, timing) => 
     element.style.transition = `all ${timing}s`; 
 };
 
+
 const Carousel = () => {
     return (
         <div id="carousel">
-            <img src="" id="arrow_left" alt="arrow left logo" onClick={() => changeSlide('left')} />
-            <img src="" id="arrow_right" alt="arrow right logo" onClick={() => changeSlide('right')} />
+            <img src="/img/logo/arrow_left.svg" id="arrow_left" alt="arrow left logo" onClick={() => changeSlide('left')} />
+            <img src="/img/logo/arrow_right.svg" id="arrow_right" alt="arrow right logo" onClick={() => changeSlide('right')} />
             <div id="circles">
                 <div id="circles_container">
                 {slides.map((slide) => 
@@ -99,7 +98,14 @@ const Carousel = () => {
                     backgroundColor: `${slide.backgroundColor}`
                 }}>
                     <h1 style={{color: `${slide.color}`}}>{slide.h1}</h1>
+                    {
+                        windowWidth <= 450 ?
+                        <img src={slide.imgSmall} alt={slide.h1} className="slideImg" />
+                        :
+                        <img src={slide.imgLarge} alt={slide.h1} className="slideImg" />
+                    }
                     <p style={{color: `${slide.color}`}}>{slide.p}</p>
+                    <a href={slide.a} target="_blank" rel="noreferrer">DISCOVER MORE</a>
                 </div>
             ))}
         </div>
