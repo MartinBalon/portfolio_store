@@ -2,19 +2,24 @@ const slides = [
     {
         id: 1,
         color: 'white',
-        backgroundColor: 'grey',
-        img : '',
-        h1: 'First Slide',
-        p: 'This is first slide',
+        backgroundColor: 'rgb(180, 50, 50)',
+        imgSmall : '/img/carouselImg/sportPhone.jpg',
+        imgLarge : '/img/carouselImg/sportDesktop.jpg',
+        h1: 'WE\'VE ADDED NEW CATEGORY!',
+        p: `Are you adrenaline junkie? 
+            If your answer is yes then you will love our new category.
+            Snowboarding, skiing, mountain biking, paragliding - we've got it all!`,
         a: 'https://www.seznam.cz'
     }, 
     {
         id: 2,
         color: 'rgb(220, 220, 220)',
         backgroundColor: 'rgb(100, 100, 100)',
-        img : '',
-        h1: 'Second Slide',
-        p: 'This is second slide',
+        imgSmall : '/img/carouselImg/SalePhone.jpg',
+        imgLarge : '/img/carouselImg/SaleDesktop.jpg',
+        h1: 'SUMMER SALE!',
+        p: `Our famous summer sale is on its way! 
+            Treat yourself with beautiful art that will brighten up your home.`,
         a: 'https://www.seznam.cz'
     },
     {
@@ -34,9 +39,9 @@ const slides = [
         backgroundColor: 'rgb(40, 40, 40)',
         imgSmall : '/img/carouselImg/CaseyHornerPhone.jpg',
         imgLarge : '/img/carouselImg/CaseyHornerDesktop.jpg',
-        h1: 'CASEY HORNER JUST JOINED OUR COMUNITY!',
+        h1: 'CASEY HORNER JUST JOINED OUR CLUB!',
         p: `Casey is a landscape photographer from Northern California. 
-            Casey is well known for his stunning pictures of Yosemite National Park or amazing
+            He is well known for his stunning pictures of Yosemite National Park or amazing
             street pictures capturing the mood of San Franciso.`,
         a: 'https://www.seznam.cz'
     }

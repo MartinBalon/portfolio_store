@@ -97,15 +97,17 @@ const Carousel = () => {
                 <div id={slide.id} key={slide.id} className="slide" style={{  
                     backgroundColor: `${slide.backgroundColor}`
                 }}>
-                    <h1 style={{color: `${slide.color}`}}>{slide.h1}</h1>
-                    {
-                        windowWidth <= 450 ?
-                        <img src={slide.imgSmall} alt={slide.h1} className="slideImg" />
-                        :
-                        <img src={slide.imgLarge} alt={slide.h1} className="slideImg" />
-                    }
-                    <p style={{color: `${slide.color}`}}>{slide.p}</p>
-                    <a href={slide.a} target="_blank" rel="noreferrer">DISCOVER MORE</a>
+                    <div>
+                        <h1 style={{color: `${slide.color}`}}>{slide.h1}</h1>
+                        {
+                            windowWidth <= 450 ?
+                            <img src={slide.imgSmall} alt={slide.h1} className="slideImg" />
+                            :
+                            <img src={slide.imgLarge} alt={slide.h1} className="slideImg" />
+                        }
+                        <p style={{color: `${slide.color}`}}>{slide.p}</p>
+                        <a href={slide.a} target="_blank" rel="noreferrer">DISCOVER MORE</a>
+                    </div>
                 </div>
             ))}
         </div>
