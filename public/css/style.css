@@ -73,8 +73,7 @@ table {
 
 body {
 	font-family: 'Dosis', sans-serif;
-	line-height: 1.2;
-	
+	line-height: 1.2;	
 }
 
 a {
@@ -95,23 +94,86 @@ h1, h2 {
 	letter-spacing: 1px;
 }
 
-/* HEADER */
+.button {
+	background-color: rgb(255, 55, 55);
+	padding: 4px 8px;
+	border-radius: 10px;
+	margin: 0 auto;
+	margin-top: 10px;
+	text-align: center;
+	font-size: 0.9em;
+	color: white;
+}
+
+/* INPUT */
+input[type="text"], input[type="password"], input[type="submit"], textarea {
+	display: block;
+	width: 100%;
+	padding: 5px;
+}
+
+input[type="checkbox"] {
+	margin: 0;
+	margin-top: 10px;
+	margin-right: 5px;
+	height: 11px;
+	width: 11px;
+}
+
+input, textarea {
+	font-family: 'Dosis', sans-serif;
+	border: none;
+	border-bottom: 1px solid rgb(100, 100, 100);
+	background-color: rgb(240, 240, 240);
+	outline: 0;
+}
+
+input:focus, textarea:focus {
+	background-color: rgb(250, 250, 250);
+	border-bottom: 1px solid rgb(255, 55, 55);
+	transition: all 0.3s;
+	box-shadow:         5px 5px 10px -2px rgba(40, 40, 40, 0.4);
+	-webkit-box-shadow: 5px 5px 10px -2px rgba(40, 40, 40, 0.4);
+	-moz-box-shadow:    5px 5px 10px -2px rgba(40, 40, 40, 0.4);
+}
+
+input[type="submit"] {
+	border: none;
+	background-color: rgb(255, 55, 55);
+	border-radius: 5px;
+	color: white;
+	box-shadow:         none;
+	-webkit-box-shadow: none;
+	-moz-box-shadow:    none;
+}
+
+form span {
+	font-size: 0.9em;
+}
+
+textarea {
+	resize: none;
+}
+
+/* SIDEBAR */
+
+/* HEADER & SIDEBAR */
 header {
 	height: 60px;
-	padding: 0 10px;
 	position: fixed;
-	z-index: 99;
+	z-index: 10;
 	width: 100%;
 	background-color: white;
-	box-shadow: 0px 0px 10px 1px rgba(40, 40, 40, 0.5);
-	-webkit-box-shadow: 0px 0px 10px 1px rgba(40, 40, 40, 0.5);
-	-moz-box-shadow: 0px 0px 10px 1px rgba(40, 40, 40, 0.5);
+	box-shadow: 0 5px 10px -2px rgba(40, 40, 40, 0.5);
+	-webkit-box-shadow: 0 5px 10px -2px rgba(40, 40, 40, 0.5);
+	-moz-box-shadow: 0 5px 10px -2px rgba(40, 40, 40, 0.5);
 }
 
 #company_logo {
 	width: 80px;
 	height: 100%;
 	padding-top: 8px;
+	margin-left: 10px;
 	float: left;	
 	font-family: 'Playfair Display', serif;
 	line-height: 1;
@@ -131,7 +193,7 @@ header {
 	float: right;
 }
 
-#shopping_cart div:hover {
+#shopping_cart:hover {
 	cursor: pointer;
 }
 
@@ -141,20 +203,12 @@ header {
 	margin-right: 5px;
 }
 
-#shopping_cart div:first-child {
-	height: 40px;
-}
-
-#shopping_cart div:nth-child(2) {
-	height: 20px;
-	font-size: 0.8em;
-}
-
 #phone_menu_logo {
-	width: 50px;
-	padding: 17px 0 17px 10px; /* 2.5% left padding to match padding of the header */
+	width: 60px;
+	padding: 17px 10px 17px 10px; /* 2.5% left padding to match padding of the header */
 	float: right;
 	border-left: 1px solid rgba(40, 40, 40, 0.1);
+	transition: all 0.5s;
 }
 
 #phone_menu_logo div {
@@ -162,19 +216,81 @@ header {
 	margin-bottom: 4px;
 	background-color: rgb(255, 55, 55);
 	border-radius: 5px;
+	transition: all 0.5s;
+}
+
+#phone_menu_logo.active div {
+	background-color: white;
+	transition: all 0.5s;
+}
+
+#phone_menu_logo.active {
+	background-color: rgb(255, 55, 55);
+	transition: all 1s;
 }
 
 #phone_menu_logo div:nth-child(3) {
 	margin-bottom: 0;
 }
 
+/* Mobile menu */
+#mobile_menu {
+	background-color: white;
+	width: 100%;
+	position: absolute;
+	z-index: 99;
+	transform: translateX(110%);
+	top: 60px;
+	border-top: 1px solid rgba(40, 40, 40, 0.1);
+	box-shadow: 0 5px 10px -2px rgba(40, 40, 40, 0.5);
+	-webkit-box-shadow: 0 5px 10px -2px rgba(40, 40, 40, 0.5);
+	-moz-box-shadow: 0 5px 10px -2px rgba(40, 40, 40, 0.5);
+	text-align: center;
+	padding: 10px;
+}
+
+#mobile_menu li {
+	font-size: 2em;
+	font-family: 'Playfair Display', serif;
+	margin-bottom: 5px;
+}
+
+.active {
+	color: rgb(255, 55, 55);;
+}
+
 /* FOOTER */
 footer {
 	background: rgb(50, 50, 50);
+	padding: 10px;
 }
 
 footer a {
 	color:  rgb(200, 200, 200);
+	display: block;
+	text-align: center;
+	font-size: 1.1em;
+}
+
+footer .column {
+	margin: 20px auto;
+}
+
+footer img {
+	width: 40px;
+	height: 40px;
+	margin: 0 10px;
+	opacity: 0.6;
+}
+
+footer h1 {
+	color: rgb(255, 55, 55);
+	font-size: 2em;
+}
+
+footer .column div {
+	width: 180px;
+	margin: 0 auto;
 }
 
 /*
@@ -182,7 +298,7 @@ footer a {
  */
 
 /* HOME PAGE */
-#container {
+.container {
 	padding-top: 60px;
 }
 
@@ -330,6 +446,7 @@ section {
 
 .item img {
 	height: 100%;
+	max-width: 100%;
 	max-height: 162px;
 	display: block;
 	margin: 0 auto;
@@ -357,16 +474,6 @@ section {
 
 .item_submit {
 	width: 100px;
-	background-color: rgb(255, 55, 55);
-	padding: 4px 8px;
-	border-radius: 10px;
-	margin: 0 auto;
-	text-align: center;
-	font-size: 0.9em;
-}
-
-.item_submit a {
-	color: white;
 }
 
 .item span {
@@ -390,22 +497,20 @@ section {
 }
 
 .cube {
-	background-color: rgba(200, 200, 200, 0.1);
-	-moz-box-shadow:    inset 0 0 10px rgba(40, 40, 40, 0.2);
-	-webkit-box-shadow: inset 0 0 10px rgba(40, 40, 40, 0.2);
-	box-shadow:         inset 0 0 10px rgba(40, 40, 40, 0.2);
+	-moz-box-shadow:    inset 0 0 12px rgba(40, 40, 40, 0.2);
+	-webkit-box-shadow: inset 0 0 12px rgba(40, 40, 40, 0.2);
+	box-shadow:         inset 0 0 12px rgba(40, 40, 40, 0.2);
 	width: 20px;
 	height: 20px;
 	float: left;
-	border: 1px solid rgba(200, 200, 200, 0.1);
+	border: 1px solid white
 }
 
 .cube_active {
-	background-color:  rgba(255, 55, 55, 0.3);
-	-moz-box-shadow:    inset 0 0 10px rgba(255, 55, 55);
-	-webkit-box-shadow: inset 0 0 10px rgba(255, 55, 55);
-	box-shadow:         inset 0 0 10px rgba(255, 55, 55);
-	border: 1px solid  rgba(255, 55, 55, 0.1);
+	-moz-box-shadow:    inset 0 0 15px rgba(255, 55, 55, 0.7);
+	-webkit-box-shadow: inset 0 0 15px rgba(255, 55, 55, 0.7);
+	box-shadow:         inset 0 0 15px rgba(255, 55, 55, 0.7);
+	border: 1px solid white;
 }
 
 .social_media_icons img {
@@ -432,7 +537,11 @@ section {
 }
 
 .artist {
-	margin: 30px auto;
+	margin: 50px auto;
+}
+
+.artist:last-child {
+	margin-bottom: 0;
 }
 
 .artist h2 {
@@ -462,4 +571,133 @@ section {
 
 .gallery_button  a {
 	color: white;
+}
+
+/* REVIEWS */
+.review {
+	margin: 20px auto;
+}
+
+.review h2 {
+	font-size: 1.2em;
+	margin-bottom: 5px;
+}
+
+.review h2 span {
+	font-size: 0.7em;
+	color: rgba(40, 40, 40, 0.5)
+}
+
+.review p span {
+	color: rgb(255, 55, 55);
+}
+
+.reviews_button {
+	width: 150px;
+	margin-bottom: 20px;
+}
+
+/* INTRODUCTION */
+
+#introduction h1 {
+	margin-bottom: 10px;
+}
+
+#introduction p {
+	padding: 10px;
+}
+
+.disclaimer {
+	color: rgb(255, 55, 55);;
+}
+
+/* SIGN IN & REGISTER */
+#sign_in, #register, #contact_us {
+	padding: 10px;
+	width: 90%;
+}
+
+#sign_in {
+	margin: 25% auto;
+}
+
+#register, #contact_us {
+	margin: 10% auto;
+}
+
+#sign_in input, #register input, #contact_us input {
+	font-size: 20px;
+}
+
+/* CONTACT US */
+.inner_container div {
+	padding: 5% 10%;
+}
+
+#contact_us h1 {
+	text-align: left;
+}
+
+/* ARTISTS */
+#filter_button img {
+	width: 20px;
+	height: 20px;
+}
+
+#filter_button, #filter {
+	border-radius: 0 5px 5px 0;
+	box-shadow: 5px 5px 10px -2px rgba(40, 40, 40, 0.5);
+	-webkit-box-shadow: 5px 5px 10px -2px rgba(40, 40, 40, 0.5);
+	-moz-box-shadow: 5px 5px 10px -2px rgba(40, 40, 40, 0.5);
+}
+
+#filter_button {
+	background: rgb(255, 55, 55);
+	bottom: 10%;
+	position: absolute;
+	width: 50px;
+	height: 30px;
+	padding: 5px;
+	padding-left: 25px;
+	right: -50px;
+}
+
+#artists .artist:last-child {
+	margin: 50px auto;
+}
+
+#filter {
+	position: fixed;
+	bottom: 5%;
+	height: 400px;
+	width: 160px;
+	background: white;
+	padding: 0 10px;
+	transform: translateX(Calc(-100% + (-10px))); /* 10px compensation for the shadow */
+}
+
+#filter input[type="checkbox"] {
+	margin-top: 0;
+	width: 13px;
+	height: 13px;
+}
+
+#filter input[type="radio"] {
+	margin: 0;
+	margin-right: 5px;
+}
+
+#filter h2 {
+	margin-top: 10px;
+	font-size: 1.2em;
+}
+
+#filter h3 {
+	margin-top: 10px;
+	font-size: 1.1em;
+}
+
+/* SHOP */
+.load_more_button {
+	width: 100px;
 }

@@ -53,8 +53,8 @@ const Item = ({data}) => {
                     </div>
                 </div>
             </div>
-            <div className="item_submit">
-                <a href="https://wwww.seznam.cz">SEE MORE</a>
+            <div className="item_submit button">
+                SEE MORE
             </div>
         </div>
     )

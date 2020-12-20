@@ -18,7 +18,7 @@ const sortData = () => {
 
     const data = Items; 
     // sort data base on sold items to determine bestsellers
-    data.sort((a,b) => a.sold > b.sold ? -1 : 1)
+    data.sort((a,b) => a.sold > b.sold ? -1 : 1);
     // show only X amount on each type of user device
     filtredData = data.slice(0, itemsToShow);
 }

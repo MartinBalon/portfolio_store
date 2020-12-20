@@ -20,10 +20,12 @@ const renderCubes = (cubes) => {
 
 const Artist = ({data}) => {
     const img = `img/artists/${data.img}.jpg`;
+    const name = data.firstName + ' ' + data.lastName;
+    
     return (
         <div className="artist">
-            <img src={img} alt={data.name} className="artist_image"/>
-            <h2>{data.name}</h2>
+            <img src={img} alt={name} className="artist_image"/>
+            <h2>{name}</h2>
             <h4>{data.based}</h4>
             <div className="social_media_icons">
                 <div>
@@ -51,8 +53,8 @@ const Artist = ({data}) => {
                     </div>
                 ))}
             </div>
-            <div className="gallery_button">
-                <a href="https://www.seznam.cz">GALLERY</a>
+            <div className="gallery_button button">
+                GALLERY
             </div>
         </div>
     )
