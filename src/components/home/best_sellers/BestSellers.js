@@ -1,13 +1,13 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import Item from '../../common/Item';
-import Items from '../../common/items';
 
-let filtredData = [];
-
-const sortData = () => {
+const BestSellers = () => {
+    const [items, setItems] = useState([]);
+    let filteredItems = [];
+    // get users window width and decide how many bestsellers to show
     const windowWidth = window.innerWidth;
     let itemsToShow;
-
     if (windowWidth <= 450) {
         itemsToShow = 4;
     } else if (windowWidth > 450 && windowWidth <= 1366) {
@@ -16,24 +16,24 @@ const sortData = () => {
         itemsToShow = 9;
     }
 
-    const data = Items; 
-    // sort data base on sold items to determine bestsellers
-    data.sort((a,b) => a.sold > b.sold ? -1 : 1);
-    // show only X amount on each type of user device
-    filtredData = data.slice(0, itemsToShow);
-}
+    // get all items from DB (local file atm)
+    useEffect(() => {
+        axios.get('/api/data').then( response => {
+            setItems(response.data.items);
+        });
+    }, []);
 
-sortData();
-
-const BestSellers = () => {
+    // filter by most selling by default
+    items.sort((a,b) => a.sold > b.sold ? -1 : 1);
+    // push items to filtered array based on how many items customer wants to view at a time
+    filteredItems = items.slice(0, itemsToShow);
+  
     return (
         <section id="best_sellers">
             <h1>Best Sellers</h1>
-            {filtredData.map((item) => (
+            {filteredItems.map((item) => (
                 <Item data={item} key={item.id} />
-            ))}
-            
-            
+            ))} 
         </section>
     )
 };

@@ -1,8 +1,33 @@
-import React from 'react';
+import React, { useState, useEffect} from 'react';
+import axios from 'axios';
 import Artist from '../../common/Artist';
-import artists from '../../common/artists';
 
 const Artists = () => {
+    const [artists, setArtists] = useState([]);
+    let randomArtistsId = [];
+    let randomArtists = [];
+
+    // get all artists from DB (local file atm)
+    useEffect(() => {
+        axios.get('/api/data').then( response => {
+            setArtists(response.data.artists);
+        });
+    }, []);
+
+    if (artists.length > 0) {
+        // create three random IDs
+        while(randomArtistsId.length < 3) {
+            let randomIndex = Math.floor(Math.random() * artists.length);
+            if (randomArtistsId.indexOf(randomIndex) === -1) {
+                randomArtistsId.push(randomIndex);
+            }
+        }
+        // populate array with three random artists
+        for (let i = 0; i < 3; i++) {
+            randomArtists.push(artists[randomArtistsId[i]]);
+        }
+    }
+
     return (
         <section>
             <h1>Artists</h1>
@@ -12,7 +37,7 @@ const Artists = () => {
                 of these artists so you can get to know what motivates them to capture 
                 these trully stunning images.
             </p>
-            {artists.map((artist) => (
+            {randomArtists.map((artist) => (
                 <Artist data={artist} key={artist.id} />
             ))}
         </section>

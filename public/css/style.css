@@ -128,7 +128,7 @@ input, textarea {
 	outline: 0;
 }
 
-input:focus, textarea:focus {
+input[type="text"]:focus, input[type="password"]:focus, textarea:focus {
 	background-color: rgb(250, 250, 250);
 	border-bottom: 1px solid rgb(255, 55, 55);
 	transition: all 0.3s;
@@ -697,7 +697,13 @@ section {
 	font-size: 1.1em;
 }
 
+#load_more_artists {
+	width: 150px;
+	margin-bottom: 20px;
+}
+
 /* SHOP */
-.load_more_button {
-	width: 100px;
+#load_more_items {
+	width: 160px;
+	margin-bottom: 20px;
 }

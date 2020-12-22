@@ -1,4 +1,5 @@
 import React from 'react';
+
 import Carousel from './carousel/Carousel';
 import BestSellers from './best_sellers/BestSellers';
 import Artists from './artists/Artists';
