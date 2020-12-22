@@ -669,11 +669,14 @@ section {
 #filter {
 	position: fixed;
 	bottom: 5%;
-	height: 400px;
 	width: 160px;
 	background: white;
-	padding: 0 10px;
+	padding: 10px;
 	transform: translateX(Calc(-100% + (-10px))); /* 10px compensation for the shadow */
+}
+
+#filter div {
+	margin: 5px auto;
 }
 
 #filter input[type="checkbox"] {
@@ -688,12 +691,11 @@ section {
 }
 
 #filter h2 {
-	margin-top: 10px;
 	font-size: 1.2em;
 }
 
 #filter h3 {
-	margin-top: 10px;
+	margin-bottom: 2px;
 	font-size: 1.1em;
 }
 

@@ -7,9 +7,10 @@ const Store = () => {
     const [sortBy, setSortBy] = useState('popular');
     const [filterCategory, setFilterCategory] = useState(['portraits', 'sport', 'nature', 'architecture', 'street', 'aerial', 'astro']);
     const [filterFinish, setFilterFinish] = useState(['glossy', 'matte', 'satin', 'metallic']);
+    const [filterFormat, setFilterFormat] = useState(['landscape', 'portrait']);
     const [items, setItems] = useState([]);
     const [numberOfItems, setNumberOfItems] = useState(12);
-    let filteredItems = [];
+    let itemsToShow = [];
 
     // get all items from DB (local file atm)
     useEffect(() => {
@@ -18,10 +19,69 @@ const Store = () => {
         });
     }, []);
 
-    // filter by most selling by default
-    items.sort((a,b) => a.sold > b.sold ? -1 : 1);
-    // push items to filtered array based on how many items customer wants to view at a time
-    filteredItems = items.slice(0, numberOfItems);
+    // new instance of received data
+    let filteredItems = items;
+
+    // sort by most selling - (default option)
+    if (sortBy === 'popular') {
+        filteredItems.sort((a,b) => a.sold > b.sold ? -1 : 1);
+    } else if (sortBy === 'cheap') {
+        filteredItems.sort((a,b) => a.pricing[0] < b.pricing[0] ? -1 : 1);
+    } else if (sortBy === 'expensive') {
+        filteredItems.sort((a,b) => a.pricing[0] > b.pricing[0] ? -1 : 1);
+    }
+    // filter products by category
+    let filteredByCategory = [];
+    // loop through each product
+    for (let product = 0; product < filteredItems.length; product++) {
+        // loop through filtered category
+        for (let category = 0; category < filterCategory.length; category++) {
+            // loop through the tags and match them with selected categories
+            for (let tag = 0; tag < filteredItems[product].tags.length; tag++) {
+                if (filterCategory[category] === filteredItems[product].tags[tag]) {
+                    filteredByCategory.push(filteredItems[product]);
+                }
+            }
+        }  
+    }
+    // filter products by finish
+    let filteredByFinish = [];
+    // loop through the products
+    for (let product = 0; product < filteredByCategory.length; product++) {
+        // loop through the selected finish
+        for (let finish = 0; finish < filterFinish.length; finish++) {
+            // loop through products available finish
+            for (
+                let productFinish = 0; 
+                productFinish < filteredByCategory[product].finish.length; 
+                productFinish++
+                ) {
+                if (filteredByCategory[product].finish[productFinish] === filterFinish[finish]) {
+                    filteredByFinish.push(filteredByCategory[product]);
+                }
+            }
+        }
+    }
+    // filter products by format (orientation) 
+    // we have only two formats so won't be looping through the format array
+    let filteredByFormat = [];
+    if (filterFormat.length === 1) {
+        for (let product = 0; product < filteredByFinish.length; product++) {
+            if (filteredByFinish[product].format === filterFormat[0]) {
+                filteredByFormat.push(filteredByFinish[product]);
+            }
+        }
+    } else {
+        filteredByFormat = filteredByFinish;
+    }
+    // get unique results as some products might have two or more same categories selected
+    // also we filter first category, then finish and as last format - there will be lots of 
+    // duplicates therefore
+    const uniqueProducts = new Set(filteredByFormat);
+    // convert Set to Array and assign its content to artists to filteredArtists
+    filteredItems = Array.from(uniqueProducts);  
+    // push filtered items to new array which will be looped through later on to display items
+    itemsToShow = filteredItems.slice(0, numberOfItems);
 
     const loadMoreItems = () => {
         const previousItems = numberOfItems;
@@ -61,15 +121,29 @@ const Store = () => {
         }
     };
 
- 
+    const updateFilterFormat = (field) => {
+        let format = field;
+        if (filterFormat.indexOf(format) >= 0) {
+            // delete format from array
+            setFilterFormat(filterFormat.filter( (i) => (i !== format) ));
+        } else {
+            setFilterFormat([...filterFormat, format]);
+        }
+    };
+
     return (
         <div className="container">
-            {filteredItems.map((item) => (
+            {itemsToShow.map((item) => (
                 <Item data={item} key={item.id} />
             ))}
-            <div className="button" id="load_more_items" onClick={ loadMoreItems }>
-                LOAD MORE PRODUCTS
-            </div>
+            {
+                numberOfItems < filteredItems.length ?
+                <div className="button" id="load_more_items" onClick={ loadMoreItems }>
+                    LOAD MORE PRODUCTS
+                </div>
+                :
+                false
+            }
             <div id="filter">
                 <div id="filter_button" onClick={ toggleFilter }>
                     <img src="/img/logo/filter_white.svg" alt="filter logo" />
@@ -182,6 +256,23 @@ const Store = () => {
                         checked={ filterFinish.indexOf('metallic') !== -1 ? true : false } 
                     /> metallic <br />
                 </div> 
+                <div>
+                    <h3>Format</h3>  
+                    <input 
+                        type="checkbox" 
+                        name="format" 
+                        value="landscape"
+                        onChange={ () => updateFilterFormat('landscape') }
+                        checked={ filterFormat.indexOf('landscape') !== -1 ? true : false } 
+                    /> landscape &#9645; <br />
+                      <input 
+                        type="checkbox" 
+                        name="format" 
+                        value="portrait"
+                        onChange={ () => updateFilterFormat('portrait') }
+                        checked={ filterFormat.indexOf('portrait') !== -1 ? true : false } 
+                    /> portrait &#9647; <br />
+                </div>
             </div> 
         </div>
     )
