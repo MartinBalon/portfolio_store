@@ -7,9 +7,8 @@ const Artists = () => {
     const [sort, setSort] = useState('firstName');
     const [filterGender, setFilterGender] = useState('all');
     const [filterCategory, setFilterCategory] = useState(['Portraits', 'Sport', 'Nature', 'Architecture', 'Street', 'Aerial', 'Astrophotography']);
-    // toggle filter - we don't use hooks as clicking on filter would re-render the page 
-    // and filter wouldn't work
-    let filter = false;
+    // toggle filter 
+    const [filter, setFilter] = useState(false);
     // display artists
     const [artists, setArtists] = useState([]);
     const [numberOfArtists, setNumberOfArtists] = useState(6);
@@ -62,11 +61,11 @@ const Artists = () => {
     const toggleFilter = () => {
         const filterContainer = document.getElementById('filter');
         if (!filter) {
-            filter = true;
+            setFilter(true);
             filterContainer.style.transform = 'translateX(0%)';
             filterContainer.style.transition = 'all 1s';
         } else {
-            filter = false;
+            setFilter(false);
             filterContainer.style.transform = 'translateX(Calc(-100% - 10px))';
             filterContainer.style.transition = 'all 1s';
         }

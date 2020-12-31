@@ -709,3 +709,68 @@ section {
 	width: 160px;
 	margin-bottom: 20px;
 }
+
+/* ITEM DETAIL */
+.item_container {
+	position: relative;
+	height: 696px; /* height of item background + height of buying options div */
+}
+
+.item_background {
+	height: 450px;
+	width: 100%;
+	background: url('/img/item_detail_phone.jpg') no-repeat center center;
+	background-size: cover;
+	position: fixed;
+	z-index: -1;
+}
+
+.productImage {
+	/* max-height: 25%;
+	max-width: 50%; */
+	display: block;
+	margin: 10% auto;
+	/* box-shadow: 2px 2px 5px rgb(100, 100, 100);
+	-webkit-box-shadow: 2px 2px 5px rgb(100, 100, 100);
+	-moz-box-shadow: 2px 2px 5px rgb(100, 100, 100); */
+}
+
+#buying_options {
+	width: 100%;
+	background: white;
+	position: absolute;
+	bottom: 0;
+	padding: 10px;
+}
+
+#buying_options img {
+	width: 25px;
+	height: 25px;
+	position: absolute;
+	top: 63px; /* (height of buying_options / 2) - (height of img / 2) */
+}
+
+.buying_option {
+	width: 50%;
+	float: left;
+	padding: 5px;
+}
+
+.buying_option input {
+	margin: 4px 0;
+	margin-right: 4px;
+}
+
+.add_to_cart h2 {
+	font-size: 2em;
+}
+
+.add_to_cart {
+	text-align: center;
+}
+
+.add_to_cart div {
+	width: 110px;
+	margin: 0 auto;
+	margin-top: 5px;
+}

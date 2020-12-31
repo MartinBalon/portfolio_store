@@ -1,9 +1,11 @@
 import React from 'react';
+import { Link } from 'react-router-dom'
 
 const Item = ({data}) => {
     const imagePath = `/img/items/${data.img}.jpg`;
     const imageAlt = `${data.name} by ${data.author}`;
     const thicknessLength = data.thickness.length;
+    const link = `/product/${data.id}`;
   
     return (
         <div className="item">
@@ -54,7 +56,7 @@ const Item = ({data}) => {
                 </div>
             </div>
             <div className="item_submit button">
-                SEE MORE
+                <Link to={link} style={{color: 'white'}}>BUY</Link>
             </div>
         </div>
     )

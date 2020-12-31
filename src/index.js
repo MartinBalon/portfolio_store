@@ -13,6 +13,7 @@ import ContactUs from './components/contact/ContactUs';
 import ShoppingCart from './components/shopping_cart/ShoppingCart';
 import Artists from './components/artists/Artists';
 import AboutUs from './components/about_us/AboutUs';
+import ItemDetail from './components/common/ItemDetail';
 
 const App = () => {
     return(
@@ -23,6 +24,7 @@ const App = () => {
                 <Route path='/artists' component={Artists} exact />
                 <Route path='/shopping_cart' component={ShoppingCart} exact />
                 <Route path='/shop' component={Store} exact />
+                <Route path='/product/:id' component={ItemDetail} />
                 <Route path='/contact_us' component={ContactUs} exact />
                 
                 <Route path='/sign_in' component={SignIn} exact />
