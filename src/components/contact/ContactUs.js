@@ -1,6 +1,10 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 const ContactUs = () => {
+    // scroll to top of the page 
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
     return (
         <div className="container contact_us">
             <div className="clearfix inner_container">

@@ -52,6 +52,14 @@ table {
  */
 
 /* Generel Rules */
+.left {
+	float: left;
+}
+
+.right {
+	float: right;
+}
+
 .clearfix {
 	overflow: auto;
 }
@@ -726,13 +734,8 @@ section {
 }
 
 .productImage {
-	/* max-height: 25%;
-	max-width: 50%; */
 	display: block;
 	margin: 10% auto;
-	/* box-shadow: 2px 2px 5px rgb(100, 100, 100);
-	-webkit-box-shadow: 2px 2px 5px rgb(100, 100, 100);
-	-moz-box-shadow: 2px 2px 5px rgb(100, 100, 100); */
 }
 
 #buying_options {
@@ -773,4 +776,113 @@ section {
 	width: 110px;
 	margin: 0 auto;
 	margin-top: 5px;
+}
+
+/* SHOPPING CART */
+.sc_container {
+	box-shadow: 3px 3px 8px 0px rgba(40, 40, 40, 0.4);
+	margin: 5% auto;
+	margin-bottom: 5%;
+	border-radius: 5px;
+}
+
+.sc_image img {
+	width: 100%;
+}
+
+.sc_quantity .left, 
+.sc_quantity .middle, 
+.sc_detail h2, 
+.sc_price h2, 
+.sc_price h4,
+.sc_name .left h2, 
+.sc_name .right h2  {
+	font-weight: bold;
+} 
+
+.sc_detail, .sc_name, .sc_price, .sc_checkout {
+	padding: 10px;
+}
+
+.sc_name .left, .sc_container {
+	width: 90%;
+}
+
+.sc_name .right {
+	width: 10%;
+	text-align: center;
+	font-size: 0.6em;
+}
+
+.sc_name .right h2 {
+	font-size: 2.4em;
+}
+
+.sc_name .left p {
+	font-size: 0.7em;
+}
+
+.sc_detail p, .sc_name .left p  {
+	color:rgb(100, 100, 100);
+}
+
+.sc_detail h2, .sc_price h2, .sc_price h4 {
+	font-size: 1.1em;
+	margin-top: 5px;
+}
+
+.sc_quantity {
+	text-align: center;
+	border: 1px solid rgb(220, 220, 220);
+	border-radius: 5px;
+	width: 60%;
+	margin: 10% auto;
+}
+
+.sc_quantity .left {
+	width: 25%;
+	background: rgb(220, 220, 220);
+	color: white;
+}
+
+.sc_quantity .middle {
+	width: 50%;
+	float: left;
+}
+
+.sc_quantity .left, .sc_quantity .middle, .sc_empty {
+	padding: 5px;
+}
+
+.sc_price div {
+	border-bottom: 1px solid rgb(220, 220, 220);
+	padding: 5px;
+	margin-top: 5px;
+}
+
+.sc_price h4, .sc_price h2 {
+	margin-top: 0;
+}
+
+.sc_checkout_container {
+	border: 1px solid rgb(255, 55, 55);
+	border-radius: 5px;
+}
+
+.sc_checkout .left {
+	width: 60%;
+}
+
+.sc_checkout .right {
+	width: 40%;
+	background-color: rgb(255, 55, 55);;
+	color: white;
+}
+
+.sc_checkout .left, .sc_checkout .right {
+	padding: 5px;
+}
+
+.sc_checkout div {
+	text-align: center;
 }

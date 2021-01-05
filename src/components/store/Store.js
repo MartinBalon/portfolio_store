@@ -19,6 +19,11 @@ const Store = () => {
         });
     }, []);
 
+    // scroll to top of the page 
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
+
     // new instance of received data
     let filteredItems = items;
 

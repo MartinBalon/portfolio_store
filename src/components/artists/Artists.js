@@ -22,6 +22,11 @@ const Artists = () => {
         });
     }, []);
 
+    // scroll to top of the page 
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
+
     // clone artists from state
     filteredArtists = artists;
     // Sort Artists

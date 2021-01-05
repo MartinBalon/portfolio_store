@@ -1,10 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import axios from 'axios';
 
 const ItemDetail = () => {
     // get product id from url param - we use parameter so customer can save or send a link to his friends
     let { id } = useParams();
+    // scroll to the top of the page
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
     // buying options hooks
     const [size, setSize] = useState();
     const [thickness, setThickness] = useState();
@@ -107,6 +111,22 @@ const ItemDetail = () => {
         return radios;
     };
 
+    const addToCart = () => {
+        const productId = id;
+        let productObj = {
+            name : product.name,
+            author: product.author,
+            image: imgPath,
+            alt: imgAlt,
+            size: size,
+            thickness: thickness,
+            finish: finish,
+            price: totalPrice,
+            quantity: 1
+        }
+        localStorage.setItem(productId, JSON.stringify(productObj));
+    };
+
     return (
         <div className="container">
             <div className="item_container">
@@ -140,12 +160,12 @@ const ItemDetail = () => {
                                 type="radio" 
                                 name="product_thickness"
                                 onChange={ () => addOption('thickness', 12, 0) }  
-                            /> 12mm ... + $0.00 <br/ >
+                            /> 12mm .... + $0.00 <br/ >
                             <input 
                                 type="radio" 
                                 name="product_thickness"
                                 onChange={ () => addOption('thickness', 18, 9.99) }  
-                            /> 18mm ... + $9.99 <br/ >
+                            /> 18mm .... + $9.99 <br/ >
                             <input 
                                 type="radio" 
                                 name="product_thickness"
@@ -159,17 +179,17 @@ const ItemDetail = () => {
                             type="radio" 
                             name="product_finish"
                             onChange={ () => addOption('finish', 'glossy', 0) } 
-                        /> glossy ... + $0.00 <br/ >
+                        /> glossy ....... + $0.00 <br/ >
                         <input 
                             type="radio" 
                             name="product_finish"
                             onChange={ () => addOption('finish', 'matte', 0) }  
-                        /> matte ... + $0.00 <br/ >
+                        /> matte ....... + $0.00 <br/ >
                         <input 
                             type="radio" 
                             name="product_finish"
                             onChange={ () => addOption('finish', 'satin', 4.99) } 
-                        /> satin ... + $4.99 <br/ >
+                        /> satin .......... + $4.99 <br/ >
                         <input 
                             type="radio" 
                             name="product_finish"
@@ -179,8 +199,8 @@ const ItemDetail = () => {
                     <div className="buying_option add_to_cart">
                         <p>Total price:</p>
                         <h2>${totalPrice}</h2>
-                        <div className="button">
-                            ADD TO CART
+                        <div className="button" onClick={ addToCart }>
+                            <Link to="/shopping_cart" className="button">ADD TO CART</Link>
                         </div>
                     </div>                          
                 </div>
