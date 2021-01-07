@@ -4,6 +4,9 @@ import Navigation from './Navigation';
 
 const Header = () => {
     const [showMobileMenu, setShowMobileMenu] = useState(false);
+    // total price comes from local storage as string so we need to convert it to a number 
+    // so we can apply toFixed to show only two decimals
+    const totalPrice = parseFloat(localStorage.getItem('totalPrice')).toFixed(2);
    
     const toggleMenu = () => {
         const menuLogo = document.getElementById('phone_menu_logo');
@@ -40,7 +43,7 @@ const Header = () => {
             <div id="shopping_cart">
                 <Link to="/shopping_cart">
                     <img src="/img/logo/shopping_cart.svg" alt="shopping cart logo" />
-                    Total: $65.00
+                    Total: ${ totalPrice ? totalPrice : 0.00 }
                 </Link>
             </div>
         

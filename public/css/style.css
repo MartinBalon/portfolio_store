@@ -787,7 +787,9 @@ section {
 }
 
 .sc_image img {
-	width: 100%;
+	height: 182px;
+	display: block;
+	margin: 0 auto;
 }
 
 .sc_quantity .left, 
@@ -811,7 +813,8 @@ section {
 .sc_name .right {
 	width: 10%;
 	text-align: center;
-	font-size: 0.6em;
+	font-size: 0.7em;
+	color: rgb(220, 220, 220);
 }
 
 .sc_name .right h2 {
@@ -885,4 +888,9 @@ section {
 
 .sc_checkout div {
 	text-align: center;
+}
+
+.sc_name .right img {
+	width: 20px;
+	height: 20px;
 }
