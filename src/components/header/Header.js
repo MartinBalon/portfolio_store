@@ -2,12 +2,30 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Navigation from './Navigation';
 
-const Header = () => {
+const Header = ({totalPrice, totalAmount}) => {
     const [showMobileMenu, setShowMobileMenu] = useState(false);
     // total price comes from local storage as string so we need to convert it to a number 
     // so we can apply toFixed to show only two decimals
-    const totalPrice = parseFloat(localStorage.getItem('totalPrice')).toFixed(2);
-   
+    // if price & amount saved in state use state values otherwise use the one from local storage
+    let price;
+    let amount;
+
+    if (totalPrice > 0) {
+        price = totalPrice.toFixed(2);
+    } else if (totalPrice === 0 && !localStorage.getItem('totalPrice')) {
+        price = 0.00;
+    } else {
+        price = parseFloat(localStorage.getItem('totalPrice')).toFixed(2);
+    }
+
+    if (totalAmount > 0) {
+        amount = totalAmount;
+    } else if (totalAmount === 0 && !localStorage.getItem('amount')) {
+        amount = 0;
+    } else {
+        amount = localStorage.getItem('amount');
+    }
+
     const toggleMenu = () => {
         const menuLogo = document.getElementById('phone_menu_logo');
         const menu = document.getElementById('mobile_menu');
@@ -22,13 +40,12 @@ const Header = () => {
             menu.style.transition = 'all 0.8s ease'; 
         }
         showMobileMenu ? setShowMobileMenu(false) : setShowMobileMenu(true);
-
     };
 
     return(
         <header>
             <div id="company_logo">
-                <Link to="/">
+                <Link to="/home">
                     <h2>Aluminium</h2>
                     <h1>Pixels</h1>
                 </Link>
@@ -43,7 +60,8 @@ const Header = () => {
             <div id="shopping_cart">
                 <Link to="/shopping_cart">
                     <img src="/img/logo/shopping_cart.svg" alt="shopping cart logo" />
-                    Total: ${ totalPrice ? totalPrice : 0.00 }
+                    <div id="total_amount">{ amount }</div>
+                    Total: ${ price }
                 </Link>
             </div>
         

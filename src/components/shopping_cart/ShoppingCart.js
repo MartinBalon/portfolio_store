@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
-const ShoppingCart = () => {
+const ShoppingCart = ({changePrice, changeProducts}) => {
     // scroll to the top of the page
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -50,7 +50,18 @@ const ShoppingCart = () => {
     shipment = shipmentQuantity <= 1 ? 4.99 * shipmentQuantity : 4.99 + ((shipmentQuantity - 1) * 1.99);
     totalPrice = subtotal + shipment;
     localStorage.setItem('totalPrice', totalPrice);
+    // save total amount to local storage so we can show total amount of products in header 
+    // even after closing the browser
+    localStorage.setItem('amount', shipmentQuantity);
 
+    // to lift state up - updating state in index.js with total price 
+    // so we can see price being updated in navbar as well
+    // we have to use 4 dependencies in order to get rid of the warning
+    useEffect(() => {
+        changePrice(totalPrice);
+        changeProducts(shipmentQuantity);
+    }, [changePrice, totalPrice, shipmentQuantity, changeProducts])
+    
     const deleteProduct = (id) => {
         // update localStorageData state so we can re-render the shopping cart
         let productsArray = [];
@@ -61,7 +72,7 @@ const ShoppingCart = () => {
         }
         setLocalStorageData(productsArray);
         // delete selected product from the local storage
-        localStorage.removeItem(id);
+        localStorage.removeItem(id);        
     };
 
     const updateQuantity = (id, mathOp) => {
@@ -80,56 +91,56 @@ const ShoppingCart = () => {
         // update localStorageData state so we can re-render the shopping cart
         setLocalStorageData(Object.entries(localStorage));
     };
-
+    
     return (
         <div className="container">
             {
-            products.length > 0 ?
-            products.map((product) => (
-                <div className="sc_product sc_container clearfix" key={product.id}>
-                    <div className="clearfix sc_name">
-                        <div className="left">
-                            <h2>{product.name}</h2>
-                            <p>by {product.author}</p>
+                products.length > 0 ?
+                products.map((product) => (
+                    <div className="sc_product sc_container clearfix" key={product.id}>
+                        <div className="clearfix sc_name">
+                            <div className="left">
+                                <h2>{product.name}</h2>
+                                <p>by {product.author}</p>
+                            </div>
+                            <div className="right" onClick={() => {
+                                deleteProduct(product.id);
+                            }}>
+                                <img src="img/logo/delete.svg" alt="delete logo" />
+                                Delete
+                            </div> 
                         </div>
-                        <div className="right" onClick={() => {
-                            deleteProduct(product.id);
-                        }}>
-                            <img src="img/logo/delete.svg" alt="delete logo" />
-                            Delete
-                        </div> 
-                    </div>
-                    <div className="sc_image">
-                        <img src={product.imgURL} alt={product.imgALT} />
-                    </div>
-                    <div className="sc_detail">
-                        <h2>Product detail:</h2>
-                        <p>{product.size}cm, {product.thickness}mm, {product.finish}</p>
-                        <h2>Price:</h2>
-                        <p>${product.price}</p>
-                        <div className="sc_quantity clearfix">
-                            <div 
-                                className="left" 
-                                onClick={() => { updateQuantity(product.id, '-') }}
-                            >-</div>
-                            <div className="middle">{product.quantity}</div>
-                            <div 
-                                className="left"
-                                onClick={() => { updateQuantity(product.id, '+') }}
-                            >+</div>
+                        <div className="sc_image">
+                            <img src={product.imgURL} alt={product.imgALT} />
+                        </div>
+                        <div className="sc_detail">
+                            <h2>Product detail:</h2>
+                            <p>{product.size}cm, {product.thickness}mm, {product.finish}</p>
+                            <h2>Price:</h2>
+                            <p>${product.price}</p>
+                            <div className="sc_quantity clearfix">
+                                <div 
+                                    className="left" 
+                                    onClick={() => { updateQuantity(product.id, '-') }}
+                                >-</div>
+                                <div className="middle">{product.quantity}</div>
+                                <div 
+                                    className="left"
+                                    onClick={() => { updateQuantity(product.id, '+') }}
+                                >+</div>
+                            </div>
                         </div>
                     </div>
+                ))
+                :
+                <div className="sc_container sc_empty">
+                    <h2>Your shopping cart is empty</h2>
                 </div>
-            ))
-            :
-            <div className="sc_container sc_empty">
-                <h2>Your shopping cart is empty</h2>
-            </div>
             }
             <div className="sc_container sc_price">
                 <div className="clearfix">
                     <h4 className="left">Subtotal:</h4>
-                    <h3 className="right">${ subtotal ? subtotal.toFixed(2) : 0.00 }</h3>
+                    <h3 className="right">${ subtotal ? subtotal.toFixed(2) : '0.00' }</h3>
                 </div>
                 <div className="clearfix">
                     <h4 className="left">Shipment:</h4>
@@ -145,9 +156,16 @@ const ShoppingCart = () => {
                     <div className="left">
                         <Link to="/shop">Continue shopping</Link>
                     </div>
-                    <div className="right">Checkout</div> 
+                    <div className="right">
+                        {
+                            products.length < 1 ?
+                            'Checkout'
+                            :
+                            <Link to="/checkout" style={{color: 'white'}}>Checkout</Link>
+                        }
+                    </div> 
                 </div>
-            </div> 
+            </div>
         </div>
     )
 };

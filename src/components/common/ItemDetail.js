@@ -200,7 +200,12 @@ const ItemDetail = () => {
                         <p>Total price:</p>
                         <h2>${totalPrice}</h2>
                         <div className="button" onClick={ addToCart }>
-                            <Link to="/shopping_cart" className="button">ADD TO CART</Link>
+                            {
+                            !size || !thickness || !finish ?
+                            'select size, thickness and finish'
+                            :
+                            <Link to="/shopping_cart" className="button">ADD TO CART</Link> 
+                            }
                         </div>
                     </div>                          
                 </div>
