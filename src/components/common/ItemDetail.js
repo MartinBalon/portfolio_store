@@ -27,7 +27,7 @@ const ItemDetail = () => {
     // round total price to two decimal places only
     let totalPrice = 0;
     totalPrice = Number(Math.round(price.size + price.thickness + price.finish +'e'+ 2) +'e-'+ 2).toFixed(2);
-    // get all the records and save only matching id = we use mySQL later on to do this
+    // get all the records and save only matching id = we use DB later on to do this
     useEffect(() => {
         axios.get('/api/data').then( response => { 
             setProducts(response.data.items);
@@ -112,8 +112,8 @@ const ItemDetail = () => {
     };
 
     const addToCart = () => {
-        const productId = id;
-        let productObj = {
+        const productObj = {
+            id: id,
             name : product.name,
             author: product.author,
             image: imgPath,
@@ -124,7 +124,7 @@ const ItemDetail = () => {
             price: totalPrice,
             quantity: 1
         }
-        localStorage.setItem(productId, JSON.stringify(productObj));
+        localStorage.setItem(productObj.id, JSON.stringify(productObj));
     };
 
     return (

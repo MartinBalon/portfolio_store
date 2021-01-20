@@ -33,10 +33,7 @@ const Payment = (props) => {
         setCreditCardOwner('Martin Balon');
     }, []);
 
-    const products = [];
-    let subtotal = 0;
-    const totalPrice = localStorage.getItem('totalPrice');
-  
+    const products = [];  
     // get an array of products    
     for (let i = 0; i < localStorageData.length; i++) {
         if (localStorageData[i][0] === 'totalPrice' || localStorageData[i][0] === 'amount') {
@@ -45,10 +42,15 @@ const Payment = (props) => {
             products.push(JSON.parse(localStorageData[i][1]));
         }
     }
+
+    let subtotal = 0;
+    const totalPrice = localStorage.getItem('totalPrice');
     // calculate subtotal again
     for (let i = 0; i < products.length; i++) {
         subtotal += parseFloat(products[i].price * products[i].quantity);
     }
+    subtotal = subtotal.toFixed(2);
+    const shipment = (totalPrice - subtotal).toFixed(2);
 
     const handleChange = (value, type) => {
         const numbersAndSpaceRegex = /^[0-9 ]*$/;
@@ -130,7 +132,7 @@ const Payment = (props) => {
             </>
         }  
     }
-    console.log(agreement)
+  
     return (
         <div className="container">
             {
@@ -181,15 +183,15 @@ const Payment = (props) => {
                                 <h2>Total:</h2>
                             </div>
                             <div className="right">
-                                <h2>${subtotal.toFixed(2)}</h2>
-                                <h2>${(totalPrice - subtotal).toFixed(2)}</h2>
+                                <h2>${subtotal}</h2>
+                                <h2>${shipment}</h2>
                                 <h2>${totalPrice}</h2>
                             </div>
                         </div>
                     </div>
                     <div className="payment_container">
                         <h2>Choose your payment method:</h2>
-                        <p class="warning">
+                        <p className="warning">
                             Google pay &amp; Apple pay don't work. <br />
                             Use fake credit card only.
                         </p>
@@ -269,13 +271,23 @@ const Payment = (props) => {
                                 agreement ?
                                 <Link 
                                     to={{
-                                        pathname: "/thank_you" ,
-                                        message: <div>
-                                                    <p>Thank you for not buying anything.</p>
-                                                    <p>Your order will never arrive as you are aware.</p>
-                                                </div>
+                                        pathname: "/order_confirmation" ,
+                                        order: {
+                                            firstName: 'Mar tin',
+                                            lastName: 'Balon',
+                                            email: 'm.balon@seznam.cz',
+                                            phone: '+420 123 456 789',
+                                            street: 'Moravska 20',
+                                            town: 'Teplice',
+                                            postCode: '415 01',
+                                            products: products,
+                                            totalPrice: '$' + totalPrice,
+                                            subtotal: '$' + subtotal,
+                                            shipment: '$' + shipment
+                                        }
                                     }}
-                                    style={{color: 'white'}} >
+                                    style={{color: 'white'}}
+                                >
                                     Pay
                                 </Link>
                                 :

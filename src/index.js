@@ -17,6 +17,7 @@ import ItemDetail from './components/common/ItemDetail';
 import Checkout from './components/checkout/Checkout';
 import Payment from './components/payment/Payment';
 import ThankYou from './components/common/ThankYou';
+import OrderConfirmation from './components/checkout/OrderConfirmation';
 
 const App = () => {
     // hooks to change total price and quantity in shopping cart so we can pass them to header
@@ -43,6 +44,7 @@ const App = () => {
                 />
                 <Route path='/checkout' component={Checkout} exact />
                 <Route path='/payment' component={Payment} exact />
+                <Route path='/order_confirmation' component={OrderConfirmation} exact />
                 <Route path='/thank_you' component={ThankYou} exact />
                 <Route path='/shop' component={Store} exact />
                 <Route path='/product/:id' component={ItemDetail} exact />
