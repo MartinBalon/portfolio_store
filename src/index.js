@@ -16,7 +16,7 @@ import AboutUs from './components/about_us/AboutUs';
 import ItemDetail from './components/common/ItemDetail';
 import Checkout from './components/checkout/Checkout';
 import Payment from './components/payment/Payment';
-import ThankYou from './components/common/ThankYou';
+// import ThankYou from './components/common/ThankYou';
 import OrderConfirmation from './components/checkout/OrderConfirmation';
 
 const App = () => {
@@ -44,8 +44,10 @@ const App = () => {
                 />
                 <Route path='/checkout' component={Checkout} exact />
                 <Route path='/payment' component={Payment} exact />
+          
                 <Route path='/order_confirmation' component={OrderConfirmation} exact />
-                <Route path='/thank_you' component={ThankYou} exact />
+       
+                {/* <Route path='/thank_you' component={ThankYou} exact /> */}
                 <Route path='/shop' component={Store} exact />
                 <Route path='/product/:id' component={ItemDetail} exact />
                 <Route path='/contact_us' component={ContactUs} exact /> 
