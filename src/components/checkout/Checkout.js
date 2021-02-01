@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
-const Checkout = () => {
+const Checkout = ({changeOrder}) => {
     // scroll to the top of the page
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -142,7 +142,7 @@ const Checkout = () => {
                 valid.push(false);
             }
         }
-        if (valid.length === 0) {
+        if (valid.length === 0) {         
             return true;
         }
         return false;
@@ -244,19 +244,20 @@ const Checkout = () => {
                         {
                             checkIfValid() ?
                             <Link 
-                                to={{
-                                    pathname: "/payment",
-                                    customer: {
-                                        firstName: firstName.value,
+                                to="/payment"
+                                style={{color: 'white'}}
+                                // set order so we can access it later on in different components
+                                onClick={ () => {
+                                    changeOrder({
+                                        firstName: firstName.value, 
                                         lastName: lastName.value,
                                         email: email.value,
                                         phone: phone.value,
                                         street: street.value,
-                                        town: town.value,
+                                        town: town.value, 
                                         postCode: postCode.value
-                                    }
-                                }} 
-                                style={{color: 'white'}}
+                                    });
+                                }}
                             >
                                 Payment
                             </Link>

@@ -1,25 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import Error from '../common/Error';
 
-const Payment = (props) => {
+const Payment = ({changeOrder, order}) => {
     // scroll to the top of the page
     useEffect(() => {
         window.scrollTo(0, 0);
     }, []);
 
-    let customer = props.location.customer; // change let to const later
-    // delete this assignment later
-    customer = {
-        firstName: 'Martin',
-        lastName: 'Balon',
-        email: 'm.balon@seznam.cz',
-        phone: '+420 123 456 789',
-        street: 'Moravska 20',
-        town: 'Teplice',
-        postCode: '415 01'
-    };
-    // delete this assignment later
- 
+    let customer = order;
     const localStorageData = Object.entries(localStorage);
     const [creditCardOwner, setCreditCardOwner] = useState();
     const [cardNumber, setCardNumber] = useState();
@@ -270,23 +259,24 @@ const Payment = (props) => {
                             {
                                 agreement ?
                                 <Link 
-                                    to={{
-                                        pathname: "/order_confirmation" ,
-                                        order: {
-                                            firstName: 'Mar tin',
-                                            lastName: 'Balon',
-                                            email: 'm.balon@seznam.cz',
-                                            phone: '+420 123 456 789',
-                                            street: 'Moravska 20',
-                                            town: 'Teplice',
-                                            postCode: '415 01',
+                                    to="/order_confirmation"  
+                                    style={{color: 'white'}}
+                                    // update order - lifting the state up
+                                    onClick={() => {
+                                        changeOrder({
+                                            firstName: customer.firstName,
+                                            lastName: customer.lastName,
+                                            email: customer.email,
+                                            phone: customer.phone,
+                                            street: customer.street,
+                                            town: customer.town,
+                                            postCode: customer.postCode,
                                             products: products,
                                             totalPrice: '$' + totalPrice,
                                             subtotal: '$' + subtotal,
                                             shipment: '$' + shipment
-                                        }
+                                        });
                                     }}
-                                    style={{color: 'white'}}
                                 >
                                     Pay
                                 </Link>
@@ -298,9 +288,7 @@ const Payment = (props) => {
                     </div>
                 </>
                 :
-                <div className="payment_container">
-                    <h1>We are sorry but something went wrong.</h1>
-                </div>
+                <Error />
             }     
         </div>
     )

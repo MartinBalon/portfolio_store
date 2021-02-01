@@ -16,16 +16,18 @@ import AboutUs from './components/about_us/AboutUs';
 import ItemDetail from './components/common/ItemDetail';
 import Checkout from './components/checkout/Checkout';
 import Payment from './components/payment/Payment';
-// import ThankYou from './components/common/ThankYou';
 import OrderConfirmation from './components/checkout/OrderConfirmation';
+import RegisterConfirmation from './components/register/RegisterConfirmation';
 
 const App = () => {
     // hooks to change total price and quantity in shopping cart so we can pass them to header
     const [totalPrice, setTotalPrice] = useState(0);
     const [totalProducts, setTotalProducts] = useState(0);
+    const [order, setOrder] = useState();
     const changePrice = price => setTotalPrice(price);
     const changeProducts = product => setTotalProducts(product);
-
+    const changeOrder = order => setOrder(order);
+    
     return(
         <BrowserRouter>
             <Header totalPrice={totalPrice} totalAmount={totalProducts} />
@@ -35,24 +37,37 @@ const App = () => {
                 <Route 
                     path='/shopping_cart'
                     render={ () => 
-                        <ShoppingCart 
+                        <ShoppingCart changePrice={changePrice} changeProducts={changeProducts}/>
+                    }
+                    exact 
+                />
+                <Route 
+                    path='/checkout'
+                    render={ () => <Checkout changeOrder={changeOrder} /> }
+                    exact 
+                />
+                <Route 
+                    path='/payment'
+                    render={ () => <Payment changeOrder={changeOrder} order={order} /> }
+                    exact 
+                />
+                <Route 
+                    path='/order_confirmation'
+                    render={ () => 
+                        <OrderConfirmation 
+                            order={order}
                             changePrice={changePrice} 
-                            changeProducts={changeProducts}
+                            changeProducts={changeProducts} 
                         />
                     }
                     exact 
                 />
-                <Route path='/checkout' component={Checkout} exact />
-                <Route path='/payment' component={Payment} exact />
-          
-                <Route path='/order_confirmation' component={OrderConfirmation} exact />
-       
-                {/* <Route path='/thank_you' component={ThankYou} exact /> */}
                 <Route path='/shop' component={Store} exact />
                 <Route path='/product/:id' component={ItemDetail} exact />
                 <Route path='/contact_us' component={ContactUs} exact /> 
                 <Route path='/sign_in' component={SignIn} exact />
                 <Route path='/register' component={Register} exact />
+                <Route path='/register_confirmation' component={RegisterConfirmation} exact />
                 <Route path='/home' component={Home} exact />
                 <Route path='/' component={Home} exact />
                 {/* error page later */}

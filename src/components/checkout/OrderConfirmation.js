@@ -2,12 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import Loading from '../common/Loading';
+import Error from '../common/Error';
 
-const ThankYou = (props) => {
+const OrderConfirmation = ({order, changePrice, changeProducts}) => {
     const [status, setStatus] = useState();
     const [orderNumber, setOrderNumber] = useState();
-    const order = props.location.order;
-
+    const completeOrder = order;
+    
     // scroll to the top of the page
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -16,8 +17,8 @@ const ThankYou = (props) => {
     // axios post data & set status
     useEffect(() => {
         axios
-        .post('/api/order', order)
-        .then(response => {
+        .post('/api/order', completeOrder)
+        .then(  response => {
             setStatus(response.status);
             setOrderNumber(response.data.orderId);
             },
@@ -26,12 +27,16 @@ const ThankYou = (props) => {
                 setStatus(500);  
             } 
         );
-    }, [order]);
+    }, [completeOrder]);
 
-    // delete everything from local storage
-    if (status === 200) {
-        localStorage.clear();
-    }
+    // delete everything from local storage & set total amount and total qty in header to 0
+    useEffect(() => {
+        if (status === 200) {
+            changePrice(0);
+            changeProducts(0);
+            localStorage.clear();
+        } 
+    }, [status, changePrice, changeProducts])
     
     return (
         <div className="container">
@@ -46,9 +51,7 @@ const ThankYou = (props) => {
                             <p>We have sent you a confirmation email to the email address you gave us.</p>
                         </>
                         :
-                        <h1>
-                            Something went wrong while processing your order.
-                        </h1>
+                        <Error />
                     }
                     <div className="button">
                         <Link to="/home" style={{color: 'white'}}>Take me back home</Link>
@@ -61,4 +64,4 @@ const ThankYou = (props) => {
     )
 };
 
-export default ThankYou;
+export default OrderConfirmation;

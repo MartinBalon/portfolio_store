@@ -48,7 +48,8 @@ const ShoppingCart = ({changePrice, changeProducts}) => {
         shipmentQuantity += products[i].quantity;
     }
     shipment = shipmentQuantity <= 1 ? 4.99 * shipmentQuantity : 4.99 + ((shipmentQuantity - 1) * 1.99);
-    totalPrice = subtotal + shipment;
+    // totalPrice = subtotal + shipment;
+    totalPrice = Number((subtotal + shipment).toFixed(2));
     localStorage.setItem('totalPrice', totalPrice);
     // save total amount to local storage so we can show total amount of products in header 
     // even after closing the browser
