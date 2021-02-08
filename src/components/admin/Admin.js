@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Redirect, Link } from 'react-router-dom';
 import validate from '../../utils/validate';
+import ItemOrder from '../common/ItemOrder';
+import axios from 'axios';
 
 const Admin = ({ customer, changeCustomer }) => {
     /* Details */
@@ -10,7 +12,7 @@ const Admin = ({ customer, changeCustomer }) => {
     const [lastName, setLastName] = useState({ 
         value: customer ? customer.lastName : '', valid: true, reason: ''
     });
-    const [email] = useState('m.balon@seznam.cz'); // read only field
+    const [email] = useState(customer ? customer.email : ''); // read only field
     const [phone, setPhone] = useState({ 
         value: customer ? customer.phone : '', valid: true, reason: ''
     });
@@ -29,12 +31,44 @@ const Admin = ({ customer, changeCustomer }) => {
     const [newPassword, setNewPassword] = useState({ value: '', valid: false, reason: '' });
     const [newPasswordAgain, setNewPasswordAgain] = useState({ value: '', valid: false, reason: '' });
     const [showPasswords, setShowPasswords] = useState(false);
+    /* Orders */
+    const [orders, setOrders] = useState();
 
     // scroll to top of the page 
     useEffect(() => {
         window.scrollTo(0, 0);
     }, []);
 
+    // get all orders
+    useEffect(() => {
+        axios
+            .post('/api/get_orders', {email})
+            .then( response => {
+                let dataA = [];
+                // map all orders
+                response.data.map((order) => {
+                    let parsedOrders = [];
+                    // items of each order are in json format
+                    order.products.map((a) => {
+                        parsedOrders.push(JSON.parse(a));
+                        return true;
+                    });
+                    // create order object with parsed json
+                    const aOrder = {
+                        products: parsedOrders,
+                        subtotal: order.subtotal,
+                        shipment: order.shipment,
+                        total: order.total,
+                        orderAt: order.date
+                    };
+                    // push each order to orders array
+                    dataA.push(aOrder);
+                    return true;
+                });
+                setOrders(dataA);
+            });
+    }, [email]);
+    
     const handleChange = (event) => {
         const value = event.target.value;
         const field = event.target.name;
@@ -324,7 +358,8 @@ const Admin = ({ customer, changeCustomer }) => {
                             pathname: '/update_password',
                             passwords: {
                                 password: password,
-                                newPassword: newPassword.value
+                                newPassword: newPassword.value,
+                                email: email
                             }
                         }}
                     >
@@ -342,41 +377,38 @@ const Admin = ({ customer, changeCustomer }) => {
             <div className="xs-w-80">
                 <h1 className="xs-m-y-5 xs-m-t-20">Order History</h1>
                 <div className="xs-m-b-10">
-                    <div className="order_history_order">
-                        <p>Order number: 234</p>
-                        <div className="order_history_item">
-                            <img src="/img/items/03.jpg" alt="dadwa" />
-                            <div>
-                                <p>Name of Art</p>
-                                <p>by Case Horner</p>
-                                <p>60 x 40cm, 18mm, matte</p>
-                                <p>Price: $66.99</p>
-                                <p>Quantity: 2</p>
-                            </div>
+                {
+                    orders ?
+                    <>
+                        <div className="order_history_order">
+                            {orders.map( (order, a) => (
+                                <div key={a}>
+                                    <p>Order number: 234</p>
+                                    {
+                                        order.products.map((product, i) => (
+                                            <ItemOrder product={product} key={i} />
+                                        ))
+                                    }
+                                
+                                    <div className="price clearfix xs-m-t-10">
+                                        <div className="left">
+                                            <h2>Subtotal:</h2>
+                                            <h2>Shipment:</h2>
+                                            <h2>Total:</h2>
+                                        </div>
+                                        <div className="right">
+                                            <h2>{order.subtotal}</h2>
+                                            <h2>{order.shipment}</h2>
+                                            <h2>{order.total}</h2>
+                                        </div>
+                                    </div>
+                                </div>
+                            ))}
                         </div>
-                        <div className="order_history_item">
-                            <img src="/img/items/03.jpg" alt="dadwa" />
-                            <div>
-                                <p>Name of Art</p>
-                                <p>by Case Horner</p>
-                                <p>60 x 40cm, 18mm, matte</p>
-                                <p>Price: $66.99</p>
-                                <p>Quantity: 2</p>
-                            </div>
-                        </div>
-                        <div className="price clearfix xs-m-t-10">
-                            <div className="left">
-                                <h2>Subtotal:</h2>
-                                <h2>Shipment:</h2>
-                                <h2>Total:</h2>
-                            </div>
-                            <div className="right">
-                                <h2>$545</h2>
-                                <h2>$515</h2>
-                                <h2>$45454</h2>
-                            </div>
-                        </div>
-                    </div>
+                    </>
+                    :
+                    <h2>There are no orders to be displayed.</h2>
+                }
                 </div>
             </div>
         </div>
