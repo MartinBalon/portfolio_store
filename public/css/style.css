@@ -79,6 +79,52 @@ table {
 	color: rgb(50, 50, 50);
 }
 
+/*********** width *************/
+.xs-w-80 {
+	width: 80%;
+	margin: 0 auto;
+}
+/*******************************/
+/*********** margin ************/
+.xs-m-y-5 {
+	margin: 5% 0;
+}
+.xs-m-t-10 {
+	margin-top: 10%;
+}
+.xs-m-t-20 {
+	margin-top: 20%;
+}
+.xs-m-b-10 {
+	margin-bottom: 10%;
+}
+.xs-m-b-20 {
+	margin-bottom: 20%;
+}
+/*******************************/
+/********* buttons *************/
+.form_button, .button {
+	border-radius: 5px;
+	background: rgb(255, 55, 55);
+	color: white;
+	text-align: center;
+	margin: 0 auto;
+}
+.form_button {
+	width: 100%;
+	font-size: 20px;
+	padding: 4px;
+}
+.button {
+	padding: 4px 8px;
+}
+/******************************/
+/******* warning message ******/
+.warning {
+	font-size: 0.8em;
+	color: red;
+}
+/******************************/
 body {
 	font-family: 'Dosis', sans-serif;
 	line-height: 1.2;	
@@ -102,16 +148,6 @@ h1, h2 {
 	letter-spacing: 1px;
 }
 
-.button {
-	background-color: rgb(255, 55, 55);
-	padding: 4px 8px;
-	border-radius: 10px;
-	margin: 0 auto;
-	margin-top: 10px;
-	text-align: center;
-	font-size: 0.9em;
-	color: white;
-}
 
 /* INPUT */
 input[type="text"], input[type="password"], input[type="submit"], textarea {
@@ -197,9 +233,9 @@ header {
 }
 
 #shopping_cart {
-	width: 130px;
 	float: right;
 	position: relative;
+	margin-right: 16px;
 }
 
 #shopping_cart:hover {
@@ -207,9 +243,8 @@ header {
 }
 
 #shopping_cart img {
-	width: 24px;
-	padding-top: 8px;
-	margin-right: 10px;
+	width: 28px;
+	padding-top: 16px;
 }
 
 #total_amount {
@@ -219,7 +254,7 @@ header {
 	width: 16px;
 	height: 16px;
 	padding: 2px;
-	top: 4px;
+	top: 8px;
 	left: 18px;
 	color: white;
 	text-align: center;
@@ -966,11 +1001,6 @@ input, #register .button {
 	font-weight: bold;
 }
 
-.payment_container .warning {
-	font-size: 0.8em;
-	color: red;
-}
-
 .payment_container .product {
 	margin-bottom: 5px;
 	height: 80px;
@@ -1170,4 +1200,23 @@ input, #register .button {
 .register_confirm_message .button {
 	width: 150px;
 	margin-bottom: 50%;
+}
+
+/* EMAIL VERIFICATION*/
+
+.email_verified h1 {
+	margin-top: 5%;
+}
+
+.email_verified .button {
+	width: 100px;
+	margin-top: 10%;
+	margin-bottom: 50%;
+}
+
+/* LOGIN */
+#sign_in .button {
+	width: 100%;
+	font-size: 20px;
+	border-radius: 5px;
 }

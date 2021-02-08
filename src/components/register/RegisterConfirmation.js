@@ -6,6 +6,8 @@ import Loading from '../common/Loading';
 const RegisterConfirmation = (props) => {
     let userData = props.location.userdata;
     const [customerCreated, setCustomerCreated] = useState();
+    const message = `We are really sorry but we couldn't set up our account. Please try again later.`;
+
     // scroll to top of the page 
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -29,7 +31,7 @@ const RegisterConfirmation = (props) => {
             {
                 customerCreated === 'yes' ?
                 <div className="register_confirm_message">
-                    <h1>Thank you, {userData.firstName}</h1>
+                    <h1>Thank you, {userData.firstName}.</h1>
                     <h2>
                         Your account is nearly ready. <br />
                         We have sent you an email with instruction on how to finish creating 
@@ -54,7 +56,7 @@ const RegisterConfirmation = (props) => {
                 </div>
                 :
                 <div>
-                    <Loading />
+                    <Loading errorMessage={ message } />
                 </div>                
             }
         </div>

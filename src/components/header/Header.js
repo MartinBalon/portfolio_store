@@ -2,21 +2,12 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Navigation from './Navigation';
 
-const Header = ({totalPrice, totalAmount}) => {
+const Header = ({ totalAmount, customer }) => {
     const [showMobileMenu, setShowMobileMenu] = useState(false);
     // total price comes from local storage as string so we need to convert it to a number 
     // so we can apply toFixed to show only two decimals
-    // if price & amount saved in state use state values otherwise use the one from local storage
-    let price;
+    // if amount saved in state use state values otherwise use the one from local storage
     let amount;
-
-    if (totalPrice > 0) {
-        price = totalPrice.toFixed(2);
-    } else if (totalPrice === 0 && !localStorage.getItem('totalPrice')) {
-        price = 0.00;
-    } else {
-        price = parseFloat(localStorage.getItem('totalPrice')).toFixed(2);
-    }
 
     if (totalAmount > 0) {
         amount = totalAmount;
@@ -61,12 +52,11 @@ const Header = ({totalPrice, totalAmount}) => {
                 <Link to="/shopping_cart">
                     <img src="/img/logo/shopping_cart.svg" alt="shopping cart logo" />
                     <div id="total_amount">{ amount }</div>
-                    Total: ${ price }
                 </Link>
             </div>
-        
+                            
             <ul id="mobile_menu" onClick={ toggleMenu }>
-                <Navigation />
+                <Navigation customer={customer} />
             </ul> 
           
         </header>

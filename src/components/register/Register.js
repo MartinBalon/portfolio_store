@@ -172,30 +172,32 @@ const Register = () => {
                     onChange={() => showPasswords ? setShowPasswords(false) : setShowPasswords(true)} 
                 />
                 <span>show passwords</span>
-
-                <br /><br />
                 
-                <div className="button">
-                    {
-                        agree && checkIfValid() ?
-                        <Link 
-                            to={{
-                                pathname: '/register_confirmation',
-                                userdata: {
-                                    firstName: firstName.value,
-                                    lastName: lastName.value,
-                                    email: email.value,
-                                    password: password.value
-                                }
-                            }}
-                            style={{ color: 'white' }} 
-                        >
+                <br /><br />              
+                {
+                    agree && checkIfValid() ?
+                    <Link 
+                        to={{
+                            pathname: '/register_confirmation',
+                            userdata: {
+                                firstName: firstName.value,
+                                lastName: lastName.value,
+                                email: email.value,
+                                password: password.value
+                            }
+                        }}
+                        style={{ color: 'white' }} 
+                    >
+                        <div className="form_button">
                             Register
-                        </Link>
-                        :
-                        'Register'
-                    }
-                </div>
+                        </div>
+                    </Link>
+                    :
+                    <div className="form_button">
+                        Register
+                    </div>
+                }
+               
                 <input 
                     type="checkbox" 
                     name="agree_tc"
