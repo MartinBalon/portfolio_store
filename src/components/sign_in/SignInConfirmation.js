@@ -3,7 +3,7 @@ import { Redirect } from 'react-router-dom';
 import Loading from '../common/Loading';
 import axios from 'axios';
 
-const SignInConfirmaiton = ({ loginData, changeCustomer }) => {
+const SignInConfirmaiton = ({ loginData, changeCustomer, changeLoginData }) => {
     const [userLoggedIn, setUserLoggedIn] = useState(false);
     const [errorMessage, setErrorMessage] = useState();
     const [redirect, setRedirect] = useState(false);
@@ -26,6 +26,8 @@ const SignInConfirmaiton = ({ loginData, changeCustomer }) => {
                 } else {
                     setErrorMessage('Your email has not been verified yet.');
                 }
+                // remove login data state
+                changeLoginData('');
             })
     },[]);// eslint-disable-line react-hooks/exhaustive-deps
 

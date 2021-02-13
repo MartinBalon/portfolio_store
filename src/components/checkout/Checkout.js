@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
-const Checkout = ({changeOrder}) => {
+const Checkout = ({ changeOrder }) => {
     // scroll to the top of the page
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -39,12 +39,14 @@ const Checkout = ({changeOrder}) => {
                 setTown(validate(inputValue, 'text'));
                 break;
             case 'postCode':
-                setPostCode(validate(inputValue, 'numlet'));
+                setPostCode(validate(inputValue, 'number'));
                 break;
             default:
                 return false;
         }     
     };
+
+
     // validate fields based on different criteria
     const validate = (inputValue, type) => {
         const valid = {value: inputValue, valid: true, reason: ''};
@@ -111,7 +113,7 @@ const Checkout = ({changeOrder}) => {
                     reason: 'Incorrect phone format - you must include "+420"'
                 };
             }
-        // numlet -> for street and post code
+        // numlet -> for street
         } else if (type === 'numlet') {
             // regex letters and numbers only
             const numbersLettersRegex = /^[a-zA-Z0-9À-ž ]*$/;
@@ -124,6 +126,17 @@ const Checkout = ({changeOrder}) => {
                     reason: 'Only letters and numbers are allowed!'
                 };
             }
+        } else if (type === 'number') {
+            const numbersRegex = /^[0-9 ]*$/;
+            if (numbersRegex.test(inputValue)) {
+                return valid;
+            } else {
+                return {
+                    value: inputValue, 
+                    valid: false, 
+                    reason: 'Only numbers are allowed!'
+                };
+            }
         // valid field
         } else {
             return {
@@ -133,6 +146,7 @@ const Checkout = ({changeOrder}) => {
             }
         }
     };
+
     // this function checks whether everything is valid - if not link to payment page won't work
     const checkIfValid = () => {
         const inputFields = [firstName, lastName, email, secondEmail, phone, street, town, postCode];
@@ -150,102 +164,109 @@ const Checkout = ({changeOrder}) => {
 
     return (
         <div className="container">
-            <div className="checkout_container">
-                <h2>Are you an existing customer?</h2>
-                <div className="button">
-                    <Link to="/sign_in" style={{color: 'white'}}>Sing in</Link>
-                </div>
-                <h2>If you don't have an account yet you can register to get extra deals.</h2>
-                <div className="button">
-                    <Link to="/register" style={{color: 'white'}}>Register</Link>
-                </div>
-            </div>
-            <div className="checkout_container">
-                <h1>Finish checkout as a guest:</h1>
-                <div>
-                    <h3>Contact details:</h3>
-                    <label htmlFor="first_name">First name:</label>
-                    <span className="warning_message">{firstName.reason}</span>
-                    <input 
-                        type="text" 
-                        name="first_name" 
-                        value={firstName.value || ''}
-                        onChange={ (event) => handleChange(event.target.value, 'firstName') } 
-                    />
-                    <br />
-                    <label htmlFor="last_name">Last name:</label>
-                    <span className="warning_message">{lastName.reason}</span>
-                    <input 
-                        type="text" 
-                        name="last_name"
-                        value={lastName.value || ''}
-                        onChange={ (event) => handleChange(event.target.value, 'lastName') } 
-                    />
-                    <br />
-                    <label htmlFor="email">Email:</label>
-                    <span className="warning_message">{email.reason}</span>
-                    <input 
-                        type="text" 
-                        name="email"
-                        value={email.value || ''}
-                        onChange={ (event) => handleChange(event.target.value, 'email') } 
-                    />
-                    <br />
-                    <label htmlFor="second_email">Email again:</label>
-                    <span className="warning_message">{secondEmail.reason}</span>
-                    <input 
-                        type="text" 
-                        name="second_email"
-                        value={secondEmail.value || ''}
-                        onChange={ (event) => handleChange(event.target.value, 'secondEmail') } 
-                    />
-                    <br />
-                    <label htmlFor="phone">Phone:</label>
-                    <span className="warning_message">{phone.reason}</span>
-                    <input 
-                        type="text" 
-                        name="phone" 
-                        value={phone.value || ''}
-                        onChange={ (event) => handleChange(event.target.value, 'phone') } 
-                    />
+            <div className="xs-w-80">
+                <div className="xs-m-y-10">
+                    <h2 className="xs-m-b-2 center">
+                        Are you an existing customer?
+                    </h2>
+                    <Link to="/sign_in">
+                        <div className="button xs-w-100px">
+                            Sign in
+                        </div>
+                    </Link>
+                    <h2 className="xs-m-b-2 xs-m-t-5 center">
+                        If you don't have an account yet you can register to get extra deals.
+                    </h2>
+                    <Link to="/register">
+                        <div className="button xs-w-100px">
+                            Register
+                        </div>
+                    </Link>
                 </div>
                 <div>
-                    <h3>Delivery Address:</h3>
-                    <label htmlFor="street">Street &amp; house number:</label>
-                    <span className="warning_message">{street.reason}</span>
-                    <input 
-                        type="text" 
-                        name="street"
-                        value={street.value || ''}
-                        onChange={ (event) => handleChange(event.target.value, 'street') } 
-                    />
-                    <br />
-                    <label htmlFor="town">Town:</label>
-                    <span className="warning_message">{town.reason}</span>
-                    <input 
-                        type="text" 
-                        name="town" 
-                        value={town.value || ''}
-                        onChange={ (event) => handleChange(event.target.value, 'town') } 
-                    />
-                    <br />
-                    <label htmlFor="post_code">Post code:</label>
-                    <span className="warning_message">{postCode.reason}</span>
-                    <input 
-                        type="text" 
-                        name="post_code" 
-                        value={postCode.value || ''}
-                        onChange={ (event) => handleChange(event.target.value, 'postCode') }
-                    />        
-                </div>  
-                <div>
-                    Proceed to payment and complete the order.
-                    <div className="button">
+                    <h1 className="xs-m-b-5">Finish checkout as a guest:</h1>
+                    <div className="xs-m-b-10">
+                        <h2 className="xs-m-b-2">Contact details:</h2>
+                        <label htmlFor="first_name">First name:</label>
+                        <span className="warning_message">{firstName.reason}</span>
+                        <input 
+                            type="text" 
+                            name="first_name" 
+                            value={firstName.value || ''}
+                            onChange={ (event) => handleChange(event.target.value, 'firstName') } 
+                        />
+                        <br />
+                        <label htmlFor="last_name">Last name:</label>
+                        <span className="warning_message">{lastName.reason}</span>
+                        <input 
+                            type="text" 
+                            name="last_name"
+                            value={lastName.value || ''}
+                            onChange={ (event) => handleChange(event.target.value, 'lastName') } 
+                        />
+                        <br />
+                        <label htmlFor="email">Email:</label>
+                        <span className="warning_message">{email.reason}</span>
+                        <input 
+                            type="text" 
+                            name="email"
+                            value={email.value || ''}
+                            onChange={ (event) => handleChange(event.target.value, 'email') } 
+                        />
+                        <br />
+                        <label htmlFor="second_email">Email again:</label>
+                        <span className="warning_message">{secondEmail.reason}</span>
+                        <input 
+                            type="text" 
+                            name="second_email"
+                            value={secondEmail.value || ''}
+                            onChange={ (event) => handleChange(event.target.value, 'secondEmail') } 
+                        />
+                        <br />
+                        <label htmlFor="phone">Phone:</label>
+                        <span className="warning_message">{phone.reason}</span>
+                        <input 
+                            type="text" 
+                            name="phone" 
+                            value={phone.value || ''}
+                            onChange={ (event) => handleChange(event.target.value, 'phone') } 
+                        />
+                    </div>
+                    <div className="xs-m-b-10">
+                        <h2 className="xs-m-b-2">Delivery Address:</h2>
+                        <label htmlFor="street">Street &amp; house number:</label>
+                        <span className="warning_message">{street.reason}</span>
+                        <input 
+                            type="text" 
+                            name="street"
+                            value={street.value || ''}
+                            onChange={ (event) => handleChange(event.target.value, 'street') } 
+                        />
+                        <br />
+                        <label htmlFor="town">Town:</label>
+                        <span className="warning_message">{town.reason}</span>
+                        <input 
+                            type="text" 
+                            name="town" 
+                            value={town.value || ''}
+                            onChange={ (event) => handleChange(event.target.value, 'town') } 
+                        />
+                        <br />
+                        <label htmlFor="post_code">Post code:</label>
+                        <span className="warning_message">{postCode.reason}</span>
+                        <input 
+                            type="text" 
+                            name="post_code" 
+                            value={postCode.value || ''}
+                            onChange={ (event) => handleChange(event.target.value, 'postCode') }
+                        />        
+                    </div>  
+                    <div className="xs-m-b-10">
+                        <p className="center xs-m-b-2">Proceed to payment and complete the order.</p>
                         {
                             checkIfValid() ?
                             <Link 
                                 to="/payment"
-                                style={{color: 'white'}}
                                 // set order so we can access it later on in different components
                                 onClick={ () => {
                                     changeOrder({
@@ -259,13 +280,17 @@ const Checkout = ({changeOrder}) => {
                                     });
                                 }}
                             >
-                                Payment
+                                <div className="button xs-w-100px">
+                                    Payment
+                                </div>
                             </Link>
                             :
-                            'Payment'
+                            <div className="button xs-w-100px">
+                                Payment
+                            </div>
                         }
-                    </div>
-                </div> 
+                    </div> 
+                </div>
             </div>
         </div>
     )

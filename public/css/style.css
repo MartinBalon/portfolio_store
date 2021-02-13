@@ -79,21 +79,49 @@ table {
 	color: rgb(50, 50, 50);
 }
 
+.bold {
+	font-weight: bold;
+}
+
+.center {
+	text-align: center;
+}
 /*********** width *************/
 .xs-w-80 {
 	width: 80%;
 	margin: 0 auto;
+}
+.xs-w-100px {
+	width: 100px;
 }
 /*******************************/
 /*********** margin ************/
 .xs-m-y-5 {
 	margin: 5% 0;
 }
+.xs-m-y-10 {
+	margin: 10% 0;
+}
+.xs-m-y-20 {
+	margin: 20% 0;
+}
+.xs-m-t-2 {
+	margin-top: 2%;
+}
+.xs-m-t-5 {
+	margin-top: 5%;
+}
 .xs-m-t-10 {
 	margin-top: 10%;
 }
 .xs-m-t-20 {
 	margin-top: 20%;
+}
+.xs-m-b-2 {
+	margin-bottom: 2%;
+}
+.xs-m-b-5 {
+	margin-bottom: 5%;
 }
 .xs-m-b-10 {
 	margin-bottom: 10%;
@@ -164,6 +192,10 @@ input[type="checkbox"] {
 	width: 11px;
 }
 
+input {
+	font-size: 20px;
+}
+
 input, textarea {
 	font-family: 'Dosis', sans-serif;
 	border: none;
@@ -198,8 +230,6 @@ form span {
 textarea {
 	resize: none;
 }
-
-/* SIDEBAR */
 
 /* HEADER & SIDEBAR */
 header {
@@ -323,11 +353,18 @@ footer {
 	padding: 10px;
 }
 
-footer a {
+footer a, footer p {
 	color:  rgb(200, 200, 200);
-	display: block;
 	text-align: center;
+}
+
+footer p {
 	font-size: 1.1em;
+}
+
+footer a {
+	display: block;
+	font-size: 1em;
 }
 
 footer .column {
@@ -669,34 +706,9 @@ section {
 }
 
 /* SIGN IN & REGISTER */
-#sign_in, #register, #register .button, #contact_us {
-	padding: 10px;
-	width: 90%;
-}
 
-#register .button {
-	width: 100%;
-}
-
-#sign_in {
-	margin: 25% auto;
-}
-
-#register, #contact_us {
-	margin: 10% auto;
-}
-
-input, #register .button {
+input {
 	font-size: 20px;
-}
-
-/* CONTACT US */
-.inner_container div {
-	padding: 5% 10%;
-}
-
-#contact_us h1 {
-	text-align: left;
 }
 
 /* ARTISTS */
@@ -996,10 +1008,6 @@ input, #register .button {
 	margin-bottom: 3px;
 }
 
-.payment_container h2, 
-.payment_container .product .details span {
-	font-weight: bold;
-}
 
 .payment_container .product {
 	margin-bottom: 5px;
@@ -1016,10 +1024,6 @@ input, #register .button {
 
 .payment_container .product .details p {
 	font-size: 14px;
-}
-
-.payment_container .price {
-	width: 50%;
 }
 
 .payment_method img {
@@ -1219,4 +1223,34 @@ input, #register .button {
 	width: 100%;
 	font-size: 20px;
 	border-radius: 5px;
+}
+
+/* Product Order used in payment and order history */
+.product .details span {
+	font-weight: bold;
+}
+
+.product {
+	margin-bottom: 5px;
+	height: 80px;
+	overflow: hidden;
+}
+
+.image {
+	max-height: 100px;
+	max-width: 140px;
+	display: block;
+	margin-right: 5px;
+}
+
+.product .details p {
+	font-size: 14px;
+}
+
+.product .name {
+	white-space: nowrap;
+}
+
+.price .left {
+	width: 100px;
 }

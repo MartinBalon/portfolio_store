@@ -199,12 +199,18 @@ const ItemDetail = () => {
                     <div className="buying_option add_to_cart">
                         <p>Total price:</p>
                         <h2>${totalPrice}</h2>
-                        <div className="button" onClick={ addToCart }>
+                        <div onClick={ addToCart }>
                             {
-                            !size || !thickness || !finish ?
-                            'select size, thickness and finish'
-                            :
-                            <Link to="/shopping_cart" className="button">ADD TO CART</Link> 
+                                !size || !thickness || !finish ?
+                                <div className="button">
+                                    select size, thickness and finish
+                                </div>
+                                :
+                                <Link to="/shopping_cart">
+                                    <div className="button">
+                                        ADD TO CART
+                                    </div>
+                                </Link> 
                             }
                         </div>
                     </div>                          

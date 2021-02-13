@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
+// Components
 import Header from './components/header/Header';
 import Footer from  './components/footer/Footer';
 import Home from './components/home/Home';
@@ -21,9 +22,11 @@ import EmailValidation from './components/register/EmailValidation';
 import Admin from './components/admin/Admin';
 import UpdateDetails from './components/admin/UpdateDetails';
 import UpdatePassword from './components/admin/UpdatePassword';
+import Logout from './components/admin/Logout';
+import SendMessage from './components/contact/SendMessage';
 
 const App = () => {
-    // hooks to change total price and quantity in shopping cart so we can pass them to header
+    // hooks to change 'global' state
     const [totalPrice, setTotalPrice] = useState(0);
     const [totalProducts, setTotalProducts] = useState(0);
     const [order, setOrder] = useState();
@@ -40,67 +43,86 @@ const App = () => {
         <BrowserRouter>
             <Header totalPrice={totalPrice} totalAmount={totalProducts} customer={customer} />
             <Switch>
-                <Route path="/about_us" component={AboutUs} exact />
-                <Route path='/artists' component={Artists} exact />
+                <Route path="/about_us" component={ AboutUs } exact />
+                <Route path='/artists' component={ Artists } exact />
+                <Route path='/shop' component={ Store } exact />
+                <Route path='/product/:id' component={ ItemDetail } exact />
+                <Route path='/contact_us' component={ ContactUs } exact />
+                <Route path='/register' component={ Register } exact />
+                <Route path='/register_confirmation' component={ RegisterConfirmation } exact />
+                <Route path='/validate_email/:code' component={ EmailValidation } exact />
+                <Route path='/update_password' component={ UpdatePassword } exact />
+                <Route path='/send_message' component={ SendMessage } exact /> 
                 <Route 
                     path='/shopping_cart'
                     render={ () => 
-                        <ShoppingCart changePrice={changePrice} changeProducts={changeProducts}/>
+                        <ShoppingCart 
+                            changePrice={ changePrice } 
+                            changeProducts={ changeProducts }
+                        />
                     }
                     exact 
                 />
                 <Route 
                     path='/checkout'
-                    render={ () => <Checkout changeOrder={changeOrder} /> }
+                    render={ () => <Checkout changeOrder={ changeOrder } /> }
                     exact 
                 />
                 <Route 
                     path='/payment'
-                    render={ () => <Payment changeOrder={changeOrder} order={order} /> }
+                    render={ () => <Payment changeOrder={ changeOrder } order={ order } /> }
                     exact 
                 />
                 <Route 
                     path='/order_confirmation'
                     render={ () => 
                         <OrderConfirmation 
-                            order={order}
-                            changePrice={changePrice} 
-                            changeProducts={changeProducts} 
+                            order={ order }
+                            changePrice={ changePrice } 
+                            changeProducts={ changeProducts } 
                         />
                     }
                     exact 
                 />
-                <Route path='/shop' component={Store} exact />
-                <Route path='/product/:id' component={ItemDetail} exact />
-                <Route path='/contact_us' component={ContactUs} exact /> 
                 <Route 
                     path='/sign_in'
-                    render={ () => <SignIn changeLoginData={changeLoginData} /> }
+                    render={ () => <SignIn changeLoginData={ changeLoginData } /> }
                     exact 
                 />
                 <Route 
                     path='/sign_in_confirmation'
                     render={ () => 
-                        <SignInConfirmaiton loginData={loginData} changeCustomer={changeCustomer} /> 
+                        <SignInConfirmaiton 
+                            loginData={ loginData }
+                            changeLoginData={ changeLoginData } 
+                            changeCustomer={ changeCustomer } 
+                        /> 
                     }
                     exact 
                 />
-                <Route path='/register' component={Register} exact />
-                <Route path='/register_confirmation' component={RegisterConfirmation} exact />
-                <Route path='/validate_email/:code' component={EmailValidation} exact />
                 <Route 
                     path='/my_account'
-                    render={ () => <Admin customer={customer} changeCustomer={changeCustomer} /> }
+                    render={ () => 
+                        <Admin customer={ customer } changeCustomer={ changeCustomer } /> }
                     exact 
                 />
                 <Route 
                     path='/update_details'
-                    render={ () => <UpdateDetails customer={customer} /> }
+                    render={ () => <UpdateDetails customer={ customer } /> }
                     exact 
                 />
-                <Route path='/update_password' component={UpdatePassword} exact />
-                <Route path='/home' component={Home} exact />
-                <Route path='/' component={Home} exact />
+                <Route 
+                    path='/log_out'
+                    render={ () => 
+                        <Logout 
+                            changeCustomer={ changeCustomer }
+                            changeLoginData={ changeLoginData }
+                        />
+                    }
+                    exact 
+                />
+                <Route path='/home' component={ Home } exact />
+                <Route path='/' component={ Home } exact />
                 {/* error page later */}
             </Switch>
             <Footer />

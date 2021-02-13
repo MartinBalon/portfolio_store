@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Error from '../common/Error';
+import ItemOrder from '../common/ItemOrder';
 
 const Payment = ({changeOrder, order}) => {
     // scroll to the top of the page
@@ -127,51 +128,35 @@ const Payment = ({changeOrder, order}) => {
             {
                 customer ?
                 <>
-                    <h1>Summary of your order</h1>
+                    <h1 className="xs-m-t-5">Summary of your order</h1>
                     <div className="payment_container">
                         <div className="inner_container">
-                            <h2>Your contact details:</h2>
+                            <h2 className="bold">Your contact details:</h2>
                             <p>{customer.firstName} {customer.lastName}</p>
                             <p>{customer.email}</p>
                             <p>{customer.phone}</p>
                         </div>
                         <div className="inner_container">
-                            <h2>Delivery address:</h2>
+                            <h2 className="bold">Delivery address:</h2>
                             <p>{customer.street}</p>
                             <p>{customer.town}</p>
                             <p>{customer.postCode}</p>
                         </div>
                     </div>
                     <div className="payment_container">
-                        <h2>Your order:</h2>                    
+                        <h2 className="bold">Your order:</h2>                    
                         {
                             products.map((product, i) => (
-                                <div className="product clearfix" key={i}>
-                                    <div className="left">
-                                        <img 
-                                            src={product.image} 
-                                            alt={product.alt} 
-                                            className="image" 
-                                        /> 
-                                    </div>
-                                    <div className="details">
-                                        <p>{product.name}</p>
-                                        <p>
-                                            {product.size}cm, {product.thickness}mm, {product.finish}
-                                        </p>
-                                        <p>${product.price}</p>
-                                        <p>Quantity: <span>{product.quantity}</span></p>
-                                    </div>
-                                </div>                           
+                                <ItemOrder product={product} key={i} />                          
                             ))
                         }
-                        <div className="price clearfix">
+                        <div className="price clearfix xs-m-t-2 bold">
                             <div className="left">
                                 <h2>Subtotal:</h2>
                                 <h2>Shipment:</h2>
                                 <h2>Total:</h2>
                             </div>
-                            <div className="right">
+                            <div className="left">
                                 <h2>${subtotal}</h2>
                                 <h2>${shipment}</h2>
                                 <h2>${totalPrice}</h2>
@@ -179,7 +164,7 @@ const Payment = ({changeOrder, order}) => {
                         </div>
                     </div>
                     <div className="payment_container">
-                        <h2>Choose your payment method:</h2>
+                        <h2 className="bold">Choose your payment method:</h2>
                         <p className="warning">
                             Google pay &amp; Apple pay don't work. <br />
                             Use fake credit card only.
@@ -192,15 +177,15 @@ const Payment = ({changeOrder, order}) => {
                         <div id="credit_card_container">
                             <div className="clearfix">
                                 <div className="icons right">
-                                    {showHideCardSystem()}
+                                    { showHideCardSystem() }
                                 </div>
                                 <div className="card_owner left">
                                     <label htmlFor="card_owner">Card owner:</label>
                                     <input 
                                         type="text"
                                         name="card_owner"
-                                        value={creditCardOwner || ''}  
-                                        onChange={(event) => 
+                                        value={ creditCardOwner || '' }  
+                                        onChange={ (event) => 
                                             handleChange(event.target.value, 'creditCardOwner')}
                                     />
                                 </div>
@@ -210,8 +195,8 @@ const Payment = ({changeOrder, order}) => {
                                 <input 
                                     type="text" 
                                     name="card_number"
-                                    value={cardNumber || ''}
-                                    onChange={(event) => 
+                                    value={ cardNumber || '' }
+                                    onChange={ (event) => 
                                         handleChange(event.target.value, 'cardNumber')}
                                 />
                             </div>
@@ -221,8 +206,8 @@ const Payment = ({changeOrder, order}) => {
                                     <input
                                         type="text" 
                                         name="expiry_date"
-                                        value={expiryDate || ''}
-                                        onChange={(event) => 
+                                        value={ expiryDate || '' }
+                                        onChange={ (event) => 
                                             handleChange(event.target.value, 'expiryDate')} 
                                     />
                                 </div>
@@ -231,8 +216,8 @@ const Payment = ({changeOrder, order}) => {
                                     <input 
                                         type="password" 
                                         name="cvc"
-                                        value={cvc || ''}
-                                        onChange={(event) => 
+                                        value={ cvc || '' }
+                                        onChange={ (event) => 
                                             handleChange(event.target.value, 'cvc')}  
                                     />
                                 </div>
@@ -240,7 +225,7 @@ const Payment = ({changeOrder, order}) => {
                             </div>
                             {
                                 expiryDateError ? 
-                                <span style={{color: 'red'}}>{expiryDateError}</span>
+                                <span style={{ color: 'red' }}>{ expiryDateError }</span>
                                 :
                                 false
                             }
@@ -249,18 +234,17 @@ const Payment = ({changeOrder, order}) => {
                             <input 
                                 type="checkbox" 
                                 name="terms_conditions_agreement"
-                                onChange={() => {
+                                onChange={ () => {
                                     agreement ? setAgreement(false) : setAgreement(true)
                                 }}
                             />
                             I agree with terms &amp; conditions
                         </div>
-                        <div className="button pay_button">
-                            {
+                        <div className="xs-m-b-10 xs-m-t-5">
+                            {   
                                 agreement ?
                                 <Link 
                                     to="/order_confirmation"  
-                                    style={{color: 'white'}}
                                     // update order - lifting the state up
                                     onClick={() => {
                                         changeOrder({
@@ -278,13 +262,16 @@ const Payment = ({changeOrder, order}) => {
                                         });
                                     }}
                                 >
-                                    Pay
+                                    <div className="button xs-w-100px">
+                                        Pay
+                                    </div>
                                 </Link>
                                 :
-                                'Pay'
+                                <div className="button xs-w-100px">
+                                    Pay
+                                </div>
                             }
                         </div>
-                      
                     </div>
                 </>
                 :

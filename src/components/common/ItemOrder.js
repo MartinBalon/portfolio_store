@@ -11,7 +11,7 @@ const ItemOrder = ({product}) => {
                 /> 
             </div>
             <div className="details">
-                <p>{product.name}</p>
+                <p className="name">{product.name}</p>
                 <p>
                     {product.size}cm, {product.thickness}mm, {product.finish}
                 </p>

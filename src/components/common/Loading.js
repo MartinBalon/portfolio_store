@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Error from './Error';
 
-const Loading = ({errorMessage}) => {
+const Loading = ({ errorMessage }) => {
     const [cube1, setCube1] = useState("loading_cube_1");
     const [cube2, setCube2] = useState("loading_cube_2");
     const [cube3, setCube3] = useState("loading_cube_3");

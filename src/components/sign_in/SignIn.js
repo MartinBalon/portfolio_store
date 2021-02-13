@@ -13,7 +13,7 @@ const SignIn = ({ changeLoginData }) => {
 
     return (
         <div className="container">
-            <form id="sign_in">
+            <div className="xs-w-80 xs-m-t-20 xs-m-b-20">
                 <label htmlFor="email">Email:</label>
                 <input 
                     type="text" 
@@ -67,7 +67,7 @@ const SignIn = ({ changeLoginData }) => {
                     onClick={ () => rememberMe ? setRememberMe(false) : setRememberMe(true) } 
                 />
                 <span>remember me</span>
-            </form>
+            </div>
         </div>
     )
 };

@@ -77,7 +77,6 @@ const moveSlide = (elementId, leftPercent, translatePercent, zindex, timing) => 
     element.style.transition = `all ${timing}s`; 
 };
 
-
 const Carousel = () => {
     return (
         <div id="carousel">

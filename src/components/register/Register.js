@@ -121,7 +121,7 @@ const Register = () => {
     
     return (
         <div className="container">
-            <form id="register">
+            <div className="xs-w-80 xs-m-t-10 xs-m-b-10">
                 <label htmlFor="first_name">First name:</label>
                 <span className="warning_message">{firstName.reason}</span>
                 <input 
@@ -207,13 +207,13 @@ const Register = () => {
 
                 <br /><br />
 
-                <span style={{color: 'red'}}> 
+                <span className="warning"> 
                     &#42; Even though this is only mock website the information you have provided
                     is going to be saved in our database so you can log in later on. You can always
                     delete your account which will wipe all the data from our database. Please use
                     a password which you don't use enywhere else (password will be encrypted).
                 </span>
-            </form>
+            </div>
         </div>
     )
 };

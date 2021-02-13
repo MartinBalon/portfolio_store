@@ -4,22 +4,22 @@ const Footer = () => {
     return (
         <footer>
             <div className="column">
-                <a href="https://www.seznam.cz">Delivery</a>
-                <a href="https://www.seznam.cz">Terms &amp; Conditions</a>
-                <a href="https://www.seznam.cz">Guarantee</a>
-                <a href="https://www.seznam.cz">Q &amp; A</a>
+                <p>Delivery</p>
+                <p>Terms &amp; Conditions</p>
+                <p>Guarantee</p>
+                <p>Q &amp; A</p>
             </div>
             <div className="column">
-                <a href="https://www.seznam.cz">Shop</a>
-                <a href="https://www.seznam.cz">About Us</a>
-                <a href="https://www.seznam.cz">Artists</a>
-                <a href="https://www.seznam.cz">Printing Proccess</a>
+                <p>Shop</p>
+                <p>About Us</p>
+                <p>Artists</p>
+                <p>Printing Proccess</p>
             </div>
             <div className="column">
-                <a href="https://www.seznam.cz">Social Media</a>
-                <a href="https://www.seznam.cz">Contact Us</a>
-                <a href="https://www.seznam.cz">Become a Partner</a>
-                <a href="https://www.seznam.cz">Vacancies</a>
+                <p>Social Media</p>
+                <p>Contact Us</p>
+                <p>Become a Partner</p>
+                <p>Vacancies</p>
             </div>
             <div className="column">
                 <div>

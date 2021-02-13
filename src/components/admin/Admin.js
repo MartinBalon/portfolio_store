@@ -53,13 +53,20 @@ const Admin = ({ customer, changeCustomer }) => {
                         parsedOrders.push(JSON.parse(a));
                         return true;
                     });
+                    // convert timestamp to date                    
+                    const parsedDate = new Date(Number(order.date)).toISOString();
+                    const year = parsedDate.slice(0, 4);    
+                    const month = parsedDate.slice(5, 7);
+                    const day = parsedDate.slice(8, 10);
+                    const dateString = `${day}/${month}/${year}`;
                     // create order object with parsed json
                     const aOrder = {
+                        orderNumber: order.id,
                         products: parsedOrders,
                         subtotal: order.subtotal,
                         shipment: order.shipment,
                         total: order.total,
-                        orderAt: order.date
+                        dateOrdered: dateString
                     };
                     // push each order to orders array
                     dataA.push(aOrder);
@@ -382,21 +389,24 @@ const Admin = ({ customer, changeCustomer }) => {
                     <>
                         <div className="order_history_order">
                             {orders.map( (order, a) => (
-                                <div key={a}>
-                                    <p>Order number: 234</p>
+                                <div key={a} className="xs-m-t-10">
+                                    <p className="xs-m-b-2 bold">
+                                        Order number: { order.orderNumber }, 
+                                        from: { order.dateOrdered }
+                                    </p>
                                     {
                                         order.products.map((product, i) => (
                                             <ItemOrder product={product} key={i} />
                                         ))
                                     }
                                 
-                                    <div className="price clearfix xs-m-t-10">
+                                    <div className="price clearfix xs-m-t-2">
                                         <div className="left">
                                             <h2>Subtotal:</h2>
                                             <h2>Shipment:</h2>
                                             <h2>Total:</h2>
                                         </div>
-                                        <div className="right">
+                                        <div className="left">
                                             <h2>{order.subtotal}</h2>
                                             <h2>{order.shipment}</h2>
                                             <h2>{order.total}</h2>

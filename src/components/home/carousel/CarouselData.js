@@ -9,7 +9,7 @@ const slides = [
         p: `Are you adrenaline junkie? 
             If your answer is yes then you will love our new category.
             Snowboarding, skiing, mountain biking, paragliding - we've got it all!`,
-        a: 'https://www.seznam.cz'
+        a: '/home'
     }, 
     {
         id: 2,
@@ -20,7 +20,7 @@ const slides = [
         h1: 'SUMMER SALE!',
         p: `Our famous summer sale is on its way! 
             Treat yourself with beautiful art that will brighten up your home.`,
-        a: 'https://www.seznam.cz'
+        a: '/home'
     },
     {
         id: 3,
@@ -31,7 +31,7 @@ const slides = [
         h1: 'ARE YOU INTO AERIAL PHOTOGRAPHY?',
         p: `Fahrul Azmi has many pictures you might like. 
             These pictures will brighten your home!`,
-        a: 'https://www.seznam.cz'
+        a: '/home'
     },
     {
         id: 4,
@@ -43,7 +43,7 @@ const slides = [
         p: `Casey is a landscape photographer from Northern California. 
             He is well known for his stunning pictures of Yosemite National Park or amazing
             street pictures capturing the mood of San Franciso.`,
-        a: 'https://www.seznam.cz'
+        a: '/home'
     }
 ];
 

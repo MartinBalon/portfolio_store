@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
-const ShoppingCart = ({changePrice, changeProducts}) => {
+const ShoppingCart = ({ changePrice, changeProducts }) => {
     // scroll to the top of the page
     useEffect(() => {
         window.scrollTo(0, 0);
