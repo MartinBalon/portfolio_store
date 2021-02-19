@@ -23,7 +23,7 @@ const Artist = ({data}) => {
     const name = data.firstName + ' ' + data.lastName;
     
     return (
-        <div className="artist">
+        <div className="artist xs-m-b-20">
             <img src={img} alt={name} className="artist_image"/>
             <h2>{name}</h2>
             <h4>{data.based}</h4>
@@ -41,7 +41,7 @@ const Artist = ({data}) => {
                 </div>
             </div>
             <p>{data.bio}</p>
-            <div className="photo_category_container">
+            <div className="photo_category_container xs-m-b-10">
                 {// loop through photo category and display cubes 
                 data.shoots.map((photography) => (
                     <div className="clearfix photo_category" key={photography.kind}>
@@ -53,7 +53,7 @@ const Artist = ({data}) => {
                     </div>
                 ))}
             </div>
-            <div className="gallery_button button">
+            <div className="button xs-w-100px">
                 GALLERY
             </div>
         </div>

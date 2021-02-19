@@ -24,35 +24,45 @@ const RegisterConfirmation = (props) => {
                     setCustomerCreated('exists');
                 }
             });
-    },[userData]);
+    }, [userData]);
     
     return (
         <div className="container">
             {
                 customerCreated === 'yes' ?
-                <div className="register_confirm_message">
-                    <h1>Thank you, {userData.firstName}.</h1>
-                    <h2>
+                <div className="xs-w-80 xs-m-t-20 xs-m-b-20">
+                    <h1 className="xs-m-b-10">
+                        Thank you, { userData.firstName }.
+                    </h1>
+                    <h2 className="xs-m-b-5 center">
                         Your account is nearly ready. <br />
                         We have sent you an email with instruction on how to finish creating 
                         your account.
                     </h2>
-                    <p>Email you have provided: {userData.email}</p>
-                    <div className="button">
-                        <Link to="/home" style={{ color: 'white' }}>Take me back home</Link>
-                    </div>
+                    <p className="xs-m-b-10 center">
+                        Email you have provided: { userData.email }
+                    </p>
+                    <Link to="/home">
+                        <div className="button xs-w-180px">
+                            Take me back home
+                        </div>
+                    </Link>
                 </div>
                 :
                 customerCreated === 'exists'?
-                <div className="register_confirm_message">
-                    <h1>{userData.firstName}, an account with your email already exists.</h1>
-                    <h2>
-                        Please try to sign in using your email. <br />
+                <div className="xs-w-80 xs-m-t-20  xs-m-b-20">
+                    <h1 className="xs-m-b-10">
+                        { userData.firstName }, an account with your email already exists.
+                    </h1>
+                    <h2 className="xs-m-b-10 center">
+                        Please try to sign in using your email. <br /><br />
                         If you have trouble signing in just follow instruction on sign in page.
                     </h2>
-                    <div className="button">
-                        <Link to="/sign_in" style={{ color: 'white' }}>Sign In</Link>
-                    </div>
+                    <Link to="/sign_in">
+                        <div className="button xs-w-100px">
+                            Sign In
+                        </div>
+                    </Link>
                 </div>
                 :
                 <div>

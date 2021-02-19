@@ -4,15 +4,17 @@ import reviews from '../../common/reviews';
 
 const Reviews = () => {
     return (
-        <section>
-            <h1>Reviews</h1>
+        <div className="xs-w-90">
+            <h1 className="xs-fs-2em">Reviews</h1>
             {reviews.map((review) => (
                 <Review data={review} key={review.id} />
             ))}
-            <div className="reviews_button button">
-                SEE MORE REVIEWS
+            <div className="xs-m-b-20 xs-m-t-10">
+                <div className="button xs-w-180px">
+                    SEE MORE REVIEWS
+                </div>
             </div>
-        </section>
+        </div>
     )
 };
 

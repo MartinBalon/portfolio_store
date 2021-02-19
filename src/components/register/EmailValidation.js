@@ -22,11 +22,15 @@ const EmailValidation = () => {
         <div className="container">
             {
                 name ?
-                <div className="email_verified">
-                    <h1>Thank you, {name} for verifying your email.</h1>
-                    <div className="button">
-                        <Link to="/sign_in" style={{ color: 'white' }}>Sign in</Link>
-                    </div>
+                <div className="xs-w-80 xs-m-t-20 xs-m-b-20">
+                    <h1 className="xs-m-b-10">
+                        Thank you, { name } for verifying your email.
+                    </h1>
+                    <Link to="/sign_in">
+                        <div className="button xs-w-100px">
+                            Sign in
+                        </div>
+                    </Link>
                 </div>
                 :
                 <Loading />

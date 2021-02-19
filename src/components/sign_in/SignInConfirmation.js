@@ -55,7 +55,7 @@ const SignInConfirmaiton = ({ loginData, changeCustomer, changeLoginData }) => {
                     }
                 </div>
                 :
-                <Loading errorMessage={errorMessage} />
+                <Loading errorMessage={ errorMessage } />
             }
         </div>
     )

@@ -4,7 +4,7 @@ import validate from '../../utils/validate';
 import ItemOrder from '../common/ItemOrder';
 import axios from 'axios';
 
-const Admin = ({ customer, changeCustomer }) => {
+const Admin = ({ customer, changeCustomer, changeLoginData }) => {
     /* Details */
     const [firstName, setFirstName] = useState({ 
         value: customer ? customer.firstName : '', valid: true, reason: ''
@@ -33,6 +33,8 @@ const Admin = ({ customer, changeCustomer }) => {
     const [showPasswords, setShowPasswords] = useState(false);
     /* Orders */
     const [orders, setOrders] = useState();
+    /* Delete account */
+    const [delAccPass, setDelAccPass] = useState();
 
     // scroll to top of the page 
     useEffect(() => {
@@ -42,7 +44,7 @@ const Admin = ({ customer, changeCustomer }) => {
     // get all orders
     useEffect(() => {
         axios
-            .post('/api/get_orders', {email})
+            .post('/api/get_orders', { email })
             .then( response => {
                 let dataA = [];
                 // map all orders
@@ -58,7 +60,7 @@ const Admin = ({ customer, changeCustomer }) => {
                     const year = parsedDate.slice(0, 4);    
                     const month = parsedDate.slice(5, 7);
                     const day = parsedDate.slice(8, 10);
-                    const dateString = `${day}/${month}/${year}`;
+                    const dateString = `${ day }/${ month }/${ year }`;
                     // create order object with parsed json
                     const aOrder = {
                         orderNumber: order.id,
@@ -235,7 +237,7 @@ const Admin = ({ customer, changeCustomer }) => {
                     type="text" 
                     name="first_name"
                     value={ firstName.value || '' }
-                    onChange={ (event) => handleChange(event)} 
+                    onChange={ (event) => handleChange(event) } 
                 />
                 <br />
 
@@ -246,7 +248,7 @@ const Admin = ({ customer, changeCustomer }) => {
                     type="text" 
                     name="last_name"
                     value={ lastName.value || '' }
-                    onChange={ (event) => handleChange(event)}  
+                    onChange={ (event) => handleChange(event) }  
                 />
                 <br />
 
@@ -266,7 +268,7 @@ const Admin = ({ customer, changeCustomer }) => {
                     type="text" 
                     name="phone"
                     value={ phone.value || '' }
-                    onChange={ (event) => handleChange(event)}  
+                    onChange={ (event) => handleChange(event) }  
                 />
                 <br />
 
@@ -277,7 +279,7 @@ const Admin = ({ customer, changeCustomer }) => {
                     type="text" 
                     name="street"
                     value={ street.value || '' }
-                    onChange={ (event) => handleChange(event)}   
+                    onChange={ (event) => handleChange(event) }   
                 />
                 <br />
 
@@ -288,7 +290,7 @@ const Admin = ({ customer, changeCustomer }) => {
                     type="text" 
                     name="town"
                     value={ town.value || '' }
-                    onChange={ (event) => handleChange(event)}    
+                    onChange={ (event) => handleChange(event) }    
                 />
                 <br />
 
@@ -299,7 +301,7 @@ const Admin = ({ customer, changeCustomer }) => {
                     type="text" 
                     name="post_code" 
                     value={ postCode.value || '' }
-                    onChange={ (event) => handleChange(event)}    
+                    onChange={ (event) => handleChange(event) }    
                 />
                 <br />
 
@@ -389,14 +391,14 @@ const Admin = ({ customer, changeCustomer }) => {
                     <>
                         <div className="order_history_order">
                             {orders.map( (order, a) => (
-                                <div key={a} className="xs-m-t-10">
+                                <div key={ a } className="xs-m-t-10">
                                     <p className="xs-m-b-2 bold">
                                         Order number: { order.orderNumber }, 
                                         from: { order.dateOrdered }
                                     </p>
                                     {
                                         order.products.map((product, i) => (
-                                            <ItemOrder product={product} key={i} />
+                                            <ItemOrder product={ product } key={ i } />
                                         ))
                                     }
                                 
@@ -407,9 +409,9 @@ const Admin = ({ customer, changeCustomer }) => {
                                             <h2>Total:</h2>
                                         </div>
                                         <div className="left">
-                                            <h2>{order.subtotal}</h2>
-                                            <h2>{order.shipment}</h2>
-                                            <h2>{order.total}</h2>
+                                            <h2>{ order.subtotal }</h2>
+                                            <h2>{ order.shipment }</h2>
+                                            <h2>{ order.total }</h2>
                                         </div>
                                     </div>
                                 </div>
@@ -419,6 +421,43 @@ const Admin = ({ customer, changeCustomer }) => {
                     :
                     <h2>There are no orders to be displayed.</h2>
                 }
+                </div>
+            </div>
+
+            <div className="xs-w-80">
+                <h1 className="xs-m-y-5 xs-m-t-20">Delete account</h1>
+                <label htmlFor="password">Password:</label>
+                <input 
+                    type={ showPasswords ? 'text' : 'password'} 
+                    name="password"
+                    value={ delAccPass || '' }
+                    onChange={ (event) => setDelAccPass(event.target.value) } 
+                />
+                <input 
+                    type="checkbox" 
+                    name="show_password"
+                    onClick={ () => showPasswords ? setShowPasswords(false) : setShowPasswords(true) }   
+                />
+                <label htmlFor="show_password">Show password</label>
+                <br /><br />
+                <div className="xs-m-b-20">
+                    {
+                        delAccPass ?
+                        <Link to='/delete_account' onClick={ () => {
+                            changeLoginData({
+                                email: email,
+                                password: delAccPass
+                            });
+                        }}>
+                            <div className="form_button">
+                                Delete Account
+                            </div>
+                        </Link>
+                        :
+                        <div className="form_button">
+                            Delete Account
+                        </div>
+                    }
                 </div>
             </div>
         </div>

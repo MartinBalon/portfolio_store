@@ -24,6 +24,7 @@ import UpdateDetails from './components/admin/UpdateDetails';
 import UpdatePassword from './components/admin/UpdatePassword';
 import Logout from './components/admin/Logout';
 import SendMessage from './components/contact/SendMessage';
+import DeleteAccount from './components/admin/DeleteAccount';
 
 const App = () => {
     // hooks to change 'global' state
@@ -41,7 +42,11 @@ const App = () => {
     
     return(
         <BrowserRouter>
-            <Header totalPrice={totalPrice} totalAmount={totalProducts} customer={customer} />
+            <Header 
+                totalPrice={ totalPrice } 
+                totalAmount={ totalProducts } 
+                customer={ customer } 
+            />
             <Switch>
                 <Route path="/about_us" component={ AboutUs } exact />
                 <Route path='/artists' component={ Artists } exact />
@@ -52,7 +57,18 @@ const App = () => {
                 <Route path='/register_confirmation' component={ RegisterConfirmation } exact />
                 <Route path='/validate_email/:code' component={ EmailValidation } exact />
                 <Route path='/update_password' component={ UpdatePassword } exact />
-                <Route path='/send_message' component={ SendMessage } exact /> 
+                <Route path='/send_message' component={ SendMessage } exact />
+                <Route 
+                    path='/delete_account'
+                    render={ () => 
+                        <DeleteAccount 
+                            changeCustomer={ changeCustomer } 
+                            loginData={ loginData }
+                            changeLoginData={ changeLoginData } 
+                        /> 
+                    }
+                    exact 
+                />
                 <Route 
                     path='/shopping_cart'
                     render={ () => 
@@ -65,7 +81,7 @@ const App = () => {
                 />
                 <Route 
                     path='/checkout'
-                    render={ () => <Checkout changeOrder={ changeOrder } /> }
+                    render={ () => <Checkout changeOrder={ changeOrder } customer={ customer } /> }
                     exact 
                 />
                 <Route 
@@ -79,7 +95,8 @@ const App = () => {
                         <OrderConfirmation 
                             order={ order }
                             changePrice={ changePrice } 
-                            changeProducts={ changeProducts } 
+                            changeProducts={ changeProducts }
+                            changeOrder={ changeOrder } 
                         />
                     }
                     exact 
@@ -103,7 +120,12 @@ const App = () => {
                 <Route 
                     path='/my_account'
                     render={ () => 
-                        <Admin customer={ customer } changeCustomer={ changeCustomer } /> }
+                        <Admin 
+                            customer={ customer } 
+                            changeCustomer={ changeCustomer }
+                            changeLoginData={ changeLoginData } 
+                        /> 
+                    }
                     exact 
                 />
                 <Route 

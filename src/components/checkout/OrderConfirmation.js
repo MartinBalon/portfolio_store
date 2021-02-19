@@ -4,7 +4,7 @@ import axios from 'axios';
 import Loading from '../common/Loading';
 import Error from '../common/Error';
 
-const OrderConfirmation = ({order, changePrice, changeProducts}) => {
+const OrderConfirmation = ({ order, changePrice, changeProducts, changeOrder }) => {
     const [status, setStatus] = useState();
     const [orderNumber, setOrderNumber] = useState();
     const completeOrder = order;
@@ -32,30 +32,40 @@ const OrderConfirmation = ({order, changePrice, changeProducts}) => {
     // delete everything from local storage & set total amount and total qty in header to 0
     useEffect(() => {
         if (status === 200) {
+            changeOrder(null)
             changePrice(0);
             changeProducts(0);
             localStorage.clear();
         } 
-    }, [status, changePrice, changeProducts])
+    }, [status, changePrice, changeProducts, changeOrder])
     
     return (
         <div className="container">
             {
                 status ?
-                    <div id="order_confirmation">
+                    <div className="xs-w-80 xs-m-t-20 xs-m-b-20">
                     {
                         status === 200 ?
                         <>
-                            <h1>We have received your order. Thank you for your purchase!</h1>
-                            <h2>Your order number is: {orderNumber}.</h2>
-                            <p>We have sent you a confirmation email to the email address you gave us.</p>
+                            <h1 className="xs-m-b-10">
+                                We have received your order. Thank you for your purchase!
+                            </h1>
+                            <h2 className="xs-m-b-5 center">
+                                Your order number is: { orderNumber }.
+                            </h2>
+                            <p className="xs-m-b-5 center">
+                                We have sent you a confirmation email to the email address you gave 
+                                us.
+                            </p>
                         </>
                         :
                         <Error />
                     }
-                    <div className="button">
-                        <Link to="/home" style={{color: 'white'}}>Take me back home</Link>
-                    </div>
+                    <Link to="/home">
+                        <div className="button xs-w-180px">
+                            Take me back home
+                        </div>
+                    </Link>
                 </div>
                 :
                 <Loading />

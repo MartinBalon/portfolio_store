@@ -92,21 +92,29 @@ const Artists = () => {
     };
 
     return (
-        <div className="container" id="artists">
-            <section>
-                <h1>Artists</h1>
+        <div className="container">
+            <div className="xs-w-90">
+                <h1 className="xs-fs-2em xs-m-t-5 xs-m-b-5">Artists</h1>
                 {artistsToShow.map((artist) => (
-                    <Artist data={artist} key={artist.id} />
+                    <Artist 
+                        data={artist} 
+                        key={artist.id}
+                    />
                 ))}
                 {
                     numberOfArtists < filteredArtists.length ?
-                    <div className="button" id="load_more_artists" onClick={ loadMoreArtists }>
-                        LOAD MORE ARTISTS
-                    </div>
+                    <div className="xs-m-b-20">
+                        <div 
+                            className="button xs-w-180px" 
+                            onClick={ loadMoreArtists }
+                        >
+                            LOAD MORE ARTISTS
+                        </div>
+                    </div>    
                     :
                     false
                 }
-            </section>
+            </div>
             <div id="filter">
                 <div id="filter_button" onClick={ toggleFilter }>
                     <img src="/img/logo/filter_white.svg" alt="filter logo" />

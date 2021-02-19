@@ -1,19 +1,51 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
-const Checkout = ({ changeOrder }) => {
+const Checkout = ({ changeOrder, customer }) => {
     // scroll to the top of the page
     useEffect(() => {
         window.scrollTo(0, 0);
     }, []);
-    const [firstName, setFirstName] = useState({value: '', valid: false, reason: ''});
-    const [lastName, setLastName] = useState({value: '', valid: false, reason: ''});
-    const [email, setEmail] = useState({value: '', valid: false, reason: ''});
-    const [secondEmail, setSecondEmail] = useState({value: '', valid: false, reason: ''});
-    const [phone, setPhone] = useState({value: '', valid: false, reason: ''});
-    const [street, setStreet] = useState({value: '', valid: false, reason: ''});
-    const [town, setTown] = useState({value: '', valid: false, reason: ''});
-    const [postCode, setPostCode] = useState({value: '', valid: false, reason: ''});
+    const [firstName, setFirstName] = useState({
+        value: customer ? customer.firstName : '', 
+        valid: customer ? true : false, 
+        reason: ''
+    });
+    const [lastName, setLastName] = useState({
+        value: customer ? customer.lastName : '', 
+        valid: customer ? true : false, 
+        reason: ''
+    });
+    const [email, setEmail] = useState({
+        value: customer ? customer.email : '', 
+        valid: customer ? true : false, 
+        reason: ''
+    });
+    const [secondEmail, setSecondEmail] = useState({
+        value: customer ? customer.email : '', 
+        valid: customer ? true : false, 
+        reason: ''
+    });
+    const [phone, setPhone] = useState({
+        value: customer ? customer.phone : '', 
+        valid: customer ? true : false, 
+        reason: ''
+    });
+    const [street, setStreet] = useState({
+        value: customer ? customer.street : '', 
+        valid: customer ? true : false, 
+        reason: ''
+    });
+    const [town, setTown] = useState({
+        value: customer ? customer.town : '', 
+        valid: customer ? true : false, 
+        reason: ''
+    });
+    const [postCode, setPostCode] = useState({
+        value: customer ? customer.postCode : '', 
+        valid: customer ? true : false, 
+        reason: ''
+    });
     // This function handles changes in input fields and call validate function on each field
     const handleChange = (inputValue, field) => {
         switch (field) {
@@ -49,7 +81,7 @@ const Checkout = ({ changeOrder }) => {
 
     // validate fields based on different criteria
     const validate = (inputValue, type) => {
-        const valid = {value: inputValue, valid: true, reason: ''};
+        const valid = { value: inputValue, valid: true, reason: '' };
         // empty field - universal for all inputs
         if (!inputValue) {
             return {
@@ -150,6 +182,7 @@ const Checkout = ({ changeOrder }) => {
     // this function checks whether everything is valid - if not link to payment page won't work
     const checkIfValid = () => {
         const inputFields = [firstName, lastName, email, secondEmail, phone, street, town, postCode];
+        // check all fields whether they are valid
         let valid = [];
         for (let i = 0; i < inputFields.length; i++) {
             if(!inputFields[i].valid) {
@@ -165,26 +198,36 @@ const Checkout = ({ changeOrder }) => {
     return (
         <div className="container">
             <div className="xs-w-80">
-                <div className="xs-m-y-10">
-                    <h2 className="xs-m-b-2 center">
-                        Are you an existing customer?
-                    </h2>
-                    <Link to="/sign_in">
-                        <div className="button xs-w-100px">
-                            Sign in
-                        </div>
-                    </Link>
-                    <h2 className="xs-m-b-2 xs-m-t-5 center">
-                        If you don't have an account yet you can register to get extra deals.
-                    </h2>
-                    <Link to="/register">
-                        <div className="button xs-w-100px">
-                            Register
-                        </div>
-                    </Link>
-                </div>
-                <div>
-                    <h1 className="xs-m-b-5">Finish checkout as a guest:</h1>
+                {
+                    !customer ?
+                    <div className="xs-m-t-10">
+                        <h2 className="xs-m-b-2 center">
+                            Are you an existing customer?
+                        </h2>
+                        <Link to="/sign_in">
+                            <div className="button xs-w-100px">
+                                Sign in
+                            </div>
+                        </Link>
+                        <h2 className="xs-m-b-2 xs-m-t-5 center">
+                            If you don't have an account yet you can register to get extra deals.
+                        </h2>
+                        <Link to="/register">
+                            <div className="button xs-w-100px">
+                                Register
+                            </div>
+                        </Link>
+                    </div>
+                    :
+                    <></>
+                }
+                <div className="xs-m-t-10">
+                    {
+                        !customer ?
+                        <h1 className="xs-m-b-5">Finish checkout as a guest:</h1>
+                        :
+                        <></>
+                    }
                     <div className="xs-m-b-10">
                         <h2 className="xs-m-b-2">Contact details:</h2>
                         <label htmlFor="first_name">First name:</label>
@@ -214,15 +257,22 @@ const Checkout = ({ changeOrder }) => {
                             onChange={ (event) => handleChange(event.target.value, 'email') } 
                         />
                         <br />
-                        <label htmlFor="second_email">Email again:</label>
-                        <span className="warning_message">{secondEmail.reason}</span>
-                        <input 
-                            type="text" 
-                            name="second_email"
-                            value={secondEmail.value || ''}
-                            onChange={ (event) => handleChange(event.target.value, 'secondEmail') } 
-                        />
-                        <br />
+                        {
+                            !customer ?
+                            <>
+                            <label htmlFor="second_email">Email again:</label>
+                            <span className="warning_message">{secondEmail.reason}</span>
+                            <input 
+                                type="text" 
+                                name="second_email"
+                                value={secondEmail.value || ''}
+                                onChange={ (event) => handleChange(event.target.value, 'secondEmail') } 
+                            />
+                            <br />
+                            </>
+                            :
+                            <></>
+                        }
                         <label htmlFor="phone">Phone:</label>
                         <span className="warning_message">{phone.reason}</span>
                         <input 
