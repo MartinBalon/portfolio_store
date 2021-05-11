@@ -48,16 +48,16 @@ const App = () => {
                 customer={ customer } 
             />
             <Switch>
-                <Route path="/about_us" component={ AboutUs } exact />
-                <Route path='/artists' component={ Artists } exact />
-                <Route path='/shop' component={ Store } exact />
-                <Route path='/product/:id' component={ ItemDetail } exact />
-                <Route path='/contact_us' component={ ContactUs } exact />
+                <Route path="/about_us" component={ AboutUs } />
+                <Route path='/artists' component={ Artists } />
+                <Route path='/shop' component={ Store } />
+                <Route path='/product/:id' component={ ItemDetail } />
+                <Route path='/contact_us' component={ ContactUs } />
                 <Route path='/register' component={ Register } exact />
-                <Route path='/register_confirmation' component={ RegisterConfirmation } exact />
-                <Route path='/validate_email/:code' component={ EmailValidation } exact />
-                <Route path='/update_password' component={ UpdatePassword } exact />
-                <Route path='/send_message' component={ SendMessage } exact />
+                <Route path='/register_confirmation' component={ RegisterConfirmation } />
+                <Route path='/validate_email/:code' component={ EmailValidation } />
+                <Route path='/update_password' component={ UpdatePassword } />
+                <Route path='/send_message' component={ SendMessage } />
                 <Route 
                     path='/delete_account'
                     render={ () => 
@@ -66,8 +66,7 @@ const App = () => {
                             loginData={ loginData }
                             changeLoginData={ changeLoginData } 
                         /> 
-                    }
-                    exact 
+                    } 
                 />
                 <Route 
                     path='/shopping_cart'
@@ -77,17 +76,14 @@ const App = () => {
                             changeProducts={ changeProducts }
                         />
                     }
-                    exact 
                 />
                 <Route 
                     path='/checkout'
                     render={ () => <Checkout changeOrder={ changeOrder } customer={ customer } /> }
-                    exact 
                 />
                 <Route 
                     path='/payment'
-                    render={ () => <Payment changeOrder={ changeOrder } order={ order } /> }
-                    exact 
+                    render={ () => <Payment changeOrder={ changeOrder } order={ order } /> } 
                 />
                 <Route 
                     path='/order_confirmation'
@@ -98,13 +94,11 @@ const App = () => {
                             changeProducts={ changeProducts }
                             changeOrder={ changeOrder } 
                         />
-                    }
-                    exact 
+                    } 
                 />
                 <Route 
                     path='/sign_in'
-                    render={ () => <SignIn changeLoginData={ changeLoginData } /> }
-                    exact 
+                    render={ () => <SignIn changeLoginData={ changeLoginData } /> } 
                 />
                 <Route 
                     path='/sign_in_confirmation'
@@ -115,7 +109,6 @@ const App = () => {
                             changeCustomer={ changeCustomer } 
                         /> 
                     }
-                    exact 
                 />
                 <Route 
                     path='/my_account'
@@ -126,12 +119,12 @@ const App = () => {
                             changeLoginData={ changeLoginData } 
                         /> 
                     }
-                    exact 
                 />
                 <Route 
                     path='/update_details'
-                    render={ () => <UpdateDetails customer={ customer } /> }
-                    exact 
+                    render={ () => 
+                        <UpdateDetails customer={ customer } changeCustomer={ changeCustomer } /> 
+                    }
                 />
                 <Route 
                     path='/log_out'
@@ -141,9 +134,8 @@ const App = () => {
                             changeLoginData={ changeLoginData }
                         />
                     }
-                    exact 
                 />
-                <Route path='/home' component={ Home } exact />
+                <Route path='/home' component={ Home } />
                 <Route path='/' component={ Home } exact />
                 {/* error page later */}
             </Switch>

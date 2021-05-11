@@ -98,7 +98,7 @@ const Checkout = ({ changeOrder, customer }) => {
             };
         } else if (type === 'text' && inputValue.length > 1) {
             // regex to filter unwanted chars.
-            const textRegex = /^[a-zA-ZÀ-ž]*$/;
+            const textRegex = /^[a-zA-ZÀ-ž ]*$/;
             if (textRegex.test(inputValue)) {
                 return valid;
             } else {

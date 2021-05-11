@@ -29,12 +29,14 @@ const BestSellers = () => {
     filteredItems = items.slice(0, itemsToShow);
   
     return (
-        <section id="best_sellers">
-            <h1>Best Sellers</h1>
-            {filteredItems.map((item) => (
-                <Item data={item} key={item.id} />
-            ))} 
-        </section>
+        <div>
+            <h1 className="xs-fs-2em m-m-b-2">Best Sellers</h1>
+            <div className="clearfix items-container">
+                { filteredItems.map((item) => (
+                    <Item data={ item } key={ item.id } />
+                )) }
+            </div> 
+        </div>
     )
 };
 

@@ -16,7 +16,7 @@ const Artists = () => {
 
     if (artists.length > 0) {
         // create three random IDs
-        while(randomArtistsId.length < 3) {
+        while (randomArtistsId.length < 3) {
             let randomIndex = Math.floor(Math.random() * artists.length);
             if (randomArtistsId.indexOf(randomIndex) === -1) {
                 randomArtistsId.push(randomIndex);
@@ -29,17 +29,15 @@ const Artists = () => {
     }
 
     return (
-        <div className="xs-w-90">
-            <h1 className="xs-fs-2em">Artists</h1>
-            <p className="xs-fs-12em xs-m-b-10">We've been working together with amazing people that keep pushing
+        <div className="xs-w-90 s-w-80 xs-m-t-10 m-m-t-5 m-cw clearfix">
+            <h1 className="xs-fs-2em xs-m-b-2">Artists</h1>
+            <p className="xs-fs-12em">We've been working together with amazing people that keep pushing
                 boundaries of art. They capture the world the way they see it and we like it.
                 We hope that you appreciate their vision of world, too! Let's have a look at few 
                 of these artists so you can get to know what motivates them to capture 
                 these trully stunning images.
             </p>
-            { randomArtists.map((artist) => (
-                <Artist data={ artist } key={ artist.id } />
-            )) }
+            { randomArtists.map(artist => <Artist data={ artist } key={ artist.id } />) }
         </div>
     )
 };

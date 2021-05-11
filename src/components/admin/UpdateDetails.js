@@ -3,7 +3,7 @@ import { Redirect } from 'react-router-dom';
 import axios from 'axios';
 import Loading from '../common/Loading';
 
-const UpdateDetails = ({customer}) => {
+const UpdateDetails = ({ customer, changeCustomer }) => {
     const [success, setSuccess] = useState(false);
     const [redirect, setRedirect] = useState(false);
     // scroll to top of the page 
@@ -18,9 +18,20 @@ const UpdateDetails = ({customer}) => {
             .then( response => {
                 if (response.status === 200) {
                     setSuccess(true);
+                    // change customer in client based on filtered data saved in DB
+                    const updatedCustomer = response.data;
+                    changeCustomer({
+                        firstName: updatedCustomer.first_name,
+                        lastName: updatedCustomer.last_name,
+                        email: updatedCustomer.email,
+                        phone: updatedCustomer.phone,
+                        street: updatedCustomer.street,
+                        town: updatedCustomer.town,
+                        postCode: updatedCustomer.post_code
+                    });
                 }
             })
-    }, [customer]);
+    }, [customer, changeCustomer]);
 
     // redirect to my account
     useEffect(() => {

@@ -44,7 +44,7 @@ const ContactUs = () => {
 
     return (
         <div className="container">
-            <div className="clearfix xs-w-80 xs-m-t-10">
+            <div className="clearfix xs-w-80 m-w-70 m-w-60 xs-m-t-10 m-m-t-5 m-w-380px">
                 <div className="xs-m-b-5">
                     <h2 className="bold">Head Office:</h2>
                     <p>Teplicka 1a</p>
@@ -64,8 +64,8 @@ const ContactUs = () => {
                     <p>noinfo@aluminiumpixels.com</p>
                 </div>
             </div>
-            <div className="xs-w-80 xs-m-t-10">
-                <h1>Leave us a message:</h1>
+            <div className="xs-w-80 m-w-70 m-w-60 xs-m-t-10 m-m-t-5 m-w-380px">
+                <h1 className="xs-fs-12em">Leave us a message:</h1>
                 <br />
                 <label htmlFor="name">
                     First and last name:

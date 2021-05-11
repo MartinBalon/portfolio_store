@@ -13,7 +13,7 @@ const SignIn = ({ changeLoginData }) => {
 
     return (
         <div className="container">
-            <div className="xs-w-80 xs-m-t-20 xs-m-b-20">
+            <div className="xs-w-80 m-w-70 m-w-60 xs-m-t-20 xs-m-b-20 m-w-380px">
                 <label htmlFor="email">Email:</label>
                 <input 
                     type="text" 

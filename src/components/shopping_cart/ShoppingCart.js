@@ -95,77 +95,116 @@ const ShoppingCart = ({ changePrice, changeProducts }) => {
     
     return (
         <div className="container">
-            {
-                products.length > 0 ?
-                products.map((product) => (
-                    <div className="sc_product sc_container clearfix" key={product.id}>
-                        <div className="clearfix sc_name">
-                            <div className="left">
-                                <h2>{product.name}</h2>
-                                <p>by {product.author}</p>
+            <div className="sc_wrapper">
+                <div className="clearfix sc-inner">
+                    { products.length > 0 ?
+                    products.map((product) => (
+                        <div className="sc_product sc_container clearfix" key={product.id}>
+                            <div className="clearfix sc_name">
+                                <div className="left">
+                                    <h2>{product.name}</h2>
+                                    <p>by {product.author}</p>
+                                </div>
+                                <div className="right" onClick={() => {
+                                    deleteProduct(product.id);
+                                }}>
+                                    <img src="img/logo/delete.svg" alt="delete logo" />
+                                    Delete
+                                </div> 
                             </div>
-                            <div className="right" onClick={() => {
-                                deleteProduct(product.id);
-                            }}>
-                                <img src="img/logo/delete.svg" alt="delete logo" />
-                                Delete
-                            </div> 
+                            <div className="sc_image">
+                                <img src={product.imgURL} alt={product.imgALT} />
+                            </div>
+                            <div className="sc_detail">
+                                <h2>Product detail:</h2>
+                                <p>{product.size}cm, {product.thickness}mm, {product.finish}</p>
+                                <h2>Price:</h2>
+                                <p>${product.price}</p>
+                                <div className="sc_quantity clearfix">
+                                    <div 
+                                        className="left" 
+                                        onClick={() => { updateQuantity(product.id, '-') }}
+                                    >-</div>
+                                    <div className="middle">{product.quantity}</div>
+                                    <div 
+                                        className="left"
+                                        onClick={() => { updateQuantity(product.id, '+') }}
+                                    >+</div>
+                                </div>
+                            </div>
                         </div>
-                        <div className="sc_image">
-                            <img src={product.imgURL} alt={product.imgALT} />
+                    ))
+                    :
+                    <div className="sc_container sc_empty">
+                        <h2>Your shopping cart is empty</h2>
+                    </div> }
+                    
+                    <div className="sc_container sc_summary">
+                        <div className="sc_price">
+                            <div className="clearfix">
+                                <h4 className="left">Subtotal:</h4>
+                                <h3 className="right">${ subtotal ? subtotal.toFixed(2) : '0.00' }</h3>
+                            </div>
+                            <div className="clearfix">
+                                <h4 className="left">Shipment:</h4>
+                                <h3 className="right">${ shipment.toFixed(2) }</h3>
+                            </div>
+                            <div className="clearfix">
+                                <h2 className="left">Total:</h2>
+                                <h3 className="right">${ totalPrice.toFixed(2) }</h3>
+                            </div>
                         </div>
-                        <div className="sc_detail">
-                            <h2>Product detail:</h2>
-                            <p>{product.size}cm, {product.thickness}mm, {product.finish}</p>
-                            <h2>Price:</h2>
-                            <p>${product.price}</p>
-                            <div className="sc_quantity clearfix">
-                                <div 
-                                    className="left" 
-                                    onClick={() => { updateQuantity(product.id, '-') }}
-                                >-</div>
-                                <div className="middle">{product.quantity}</div>
-                                <div 
-                                    className="left"
-                                    onClick={() => { updateQuantity(product.id, '+') }}
-                                >+</div>
+
+                        <div className="sc_checkout">
+                            <div className="sc_checkout_container clearfix">
+                                <div className="left">
+                                    <Link to="/shop">Continue shopping</Link>
+                                </div>
+                                <div className="right">
+                                    {
+                                        products.length < 1 ?
+                                        'Checkout'
+                                        :
+                                        <Link to="/checkout" style={{color: 'white'}}>Checkout</Link>
+                                    }
+                                </div> 
                             </div>
                         </div>
                     </div>
-                ))
-                :
-                <div className="sc_container sc_empty">
-                    <h2>Your shopping cart is empty</h2>
-                </div>
-            }
-            <div className="sc_container sc_price">
-                <div className="clearfix">
-                    <h4 className="left">Subtotal:</h4>
-                    <h3 className="right">${ subtotal ? subtotal.toFixed(2) : '0.00' }</h3>
-                </div>
-                <div className="clearfix">
-                    <h4 className="left">Shipment:</h4>
-                    <h3 className="right">${ shipment.toFixed(2) }</h3>
-                </div>
-                <div className="clearfix">
-                    <h2 className="left">Total:</h2>
-                    <h3 className="right">${ totalPrice.toFixed(2) }</h3>
-                </div>
-            </div>
-            <div className="sc_container sc_checkout">
-                <div className="sc_checkout_container clearfix">
-                    <div className="left">
-                        <Link to="/shop">Continue shopping</Link>
+                   
+                </div>                
+
+                {/* <div className="sc_container sc_price">
+                    <div className="clearfix">
+                        <h4 className="left">Subtotal:</h4>
+                        <h3 className="right">${ subtotal ? subtotal.toFixed(2) : '0.00' }</h3>
                     </div>
-                    <div className="right">
-                        {
-                            products.length < 1 ?
-                            'Checkout'
-                            :
-                            <Link to="/checkout" style={{color: 'white'}}>Checkout</Link>
-                        }
-                    </div> 
+                    <div className="clearfix">
+                        <h4 className="left">Shipment:</h4>
+                        <h3 className="right">${ shipment.toFixed(2) }</h3>
+                    </div>
+                    <div className="clearfix">
+                        <h2 className="left">Total:</h2>
+                        <h3 className="right">${ totalPrice.toFixed(2) }</h3>
+                    </div>
                 </div>
+
+                <div className="sc_container sc_checkout">
+                    <div className="sc_checkout_container clearfix">
+                        <div className="left">
+                            <Link to="/shop">Continue shopping</Link>
+                        </div>
+                        <div className="right">
+                            {
+                                products.length < 1 ?
+                                'Checkout'
+                                :
+                                <Link to="/checkout" style={{color: 'white'}}>Checkout</Link>
+                            }
+                        </div> 
+                    </div>
+                </div> */}
+
             </div>
         </div>
     )

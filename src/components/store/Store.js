@@ -138,13 +138,17 @@ const Store = () => {
 
     return (
         <div className="container">
-            {itemsToShow.map((item) => (
-                <Item data={item} key={item.id} />
-            ))}
+            <div className="items-container m-m-t-5 clearfix">
+                {itemsToShow.map((item) => (
+                    <Item data={item} key={item.id} />
+                ))}
+            </div>
             {
                 numberOfItems < filteredItems.length ?
-                <div className="button" id="load_more_items" onClick={ loadMoreItems }>
-                    LOAD MORE PRODUCTS
+                <div className="xs-m-b-10 xs-m-t-10 m-m-t-5 m-m-b-5">
+                    <div className="button xs-w-180px" onClick={ loadMoreItems }>
+                        LOAD MORE PRODUCTS
+                    </div>
                 </div>
                 :
                 false

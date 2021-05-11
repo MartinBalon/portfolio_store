@@ -127,39 +127,39 @@ const Payment = ({changeOrder, order}) => {
         <div className="container">
             {
                 customer ?
-                <>
-                    <h1 className="xs-m-t-5">Summary of your order</h1>
-                    <div className="payment_container">
-                        <div className="inner_container">
+                <div className="xs-w-90">
+                    <h1 className="xs-m-t-5 xs-m-b-5 xs-fs-16em">Summary of your order</h1>
+                    <div className="clearfix">
+                        <div className="xs-m-b-5">
                             <h2 className="bold">Your contact details:</h2>
-                            <p>{customer.firstName} {customer.lastName}</p>
-                            <p>{customer.email}</p>
-                            <p>{customer.phone}</p>
+                            <p>{ customer.firstName } { customer.lastName }</p>
+                            <p>{ customer.email }</p>
+                            <p>{ customer.phone }</p>
                         </div>
-                        <div className="inner_container">
+                        <div className="xs-m-b-5">
                             <h2 className="bold">Delivery address:</h2>
-                            <p>{customer.street}</p>
-                            <p>{customer.town}</p>
-                            <p>{customer.postCode}</p>
+                            <p>{ customer.street }</p>
+                            <p>{ customer.town }</p>
+                            <p>{ customer.postCode }</p>
                         </div>
                     </div>
                     <div className="payment_container">
-                        <h2 className="bold">Your order:</h2>                    
+                        <h2 className="bold xs-m-b-2">Your order:</h2>                    
                         {
                             products.map((product, i) => (
-                                <ItemOrder product={product} key={i} />                          
+                                <ItemOrder product={ product } key={ i } />                          
                             ))
                         }
-                        <div className="price clearfix xs-m-t-2 bold">
+                        <div className="clearfix xs-m-t-5 xs-m-b-5 bold">
                             <div className="left">
                                 <h2>Subtotal:</h2>
                                 <h2>Shipment:</h2>
                                 <h2>Total:</h2>
                             </div>
-                            <div className="left">
-                                <h2>${subtotal}</h2>
-                                <h2>${shipment}</h2>
-                                <h2>${totalPrice}</h2>
+                            <div className="left xs-m-l-5">
+                                <h2>${ subtotal }</h2>
+                                <h2>${ shipment }</h2>
+                                <h2>${ totalPrice }</h2>
                             </div>
                         </div>
                     </div>
@@ -273,7 +273,7 @@ const Payment = ({changeOrder, order}) => {
                             }
                         </div>
                     </div>
-                </>
+                </div>
                 :
                 <Error />
             }     

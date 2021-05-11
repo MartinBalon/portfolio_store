@@ -9,21 +9,21 @@ const renderCubes = (cubes) => {
     // create 8 cubes and give them active class based on interest
     for (let i = 0; i < 8; i++) {
         if (amountOfCubes > 0) {
-            cubesToRender.push(<div className="cube cube_active" key={id}></div>);
+            cubesToRender.push(<div className="cube cube_active" key={ id }></div>);
         } else {
-            cubesToRender.push(<div className="cube" key={id}></div>);  
+            cubesToRender.push(<div className="cube" key={ id }></div>);  
         }
         amountOfCubes--;
         id++      
     }
 };
 
-const Artist = ({data}) => {
+const Artist = ({ data }) => {
     const img = `img/artists/${data.img}.jpg`;
     const name = data.firstName + ' ' + data.lastName;
     
     return (
-        <div className="artist xs-m-b-20">
+        <div className="artist xs-m-t-20 m-m-t-10">
             <img src={img} alt={name} className="artist_image"/>
             <h2>{name}</h2>
             <h4>{data.based}</h4>
@@ -54,7 +54,13 @@ const Artist = ({data}) => {
                 ))}
             </div>
             <div className="button xs-w-100px">
-                GALLERY
+                <a 
+                    href={ data.social.unsplash } 
+                    target="blank" 
+                    style={{ color: 'white' }}
+                >
+                    GALLERY
+                </a>
             </div>
         </div>
     )

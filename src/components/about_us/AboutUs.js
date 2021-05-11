@@ -8,8 +8,8 @@ const AboutUs = () => {
 
     return (
         <div className="container">
-            <div className="xs-w-80">
-                <h1 className="xs-m-t-5 xs-m-b-5">Aluminium Pixels</h1>
+            <div className="xs-w-80 m-cw">
+                <h1 className="xs-m-t-5 xs-m-b-5 xs-fs-2em">Aluminium Pixels</h1>
                 <h2 
                     style={{ color: 'rgb(255, 55, 55)'}} 
                     className="center xs-m-b-2"

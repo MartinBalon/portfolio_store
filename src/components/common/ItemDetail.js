@@ -112,6 +112,7 @@ const ItemDetail = () => {
     };
 
     const addToCart = () => {
+        // create a product
         const productObj = {
             id: id,
             name : product.name,
@@ -124,6 +125,8 @@ const ItemDetail = () => {
             price: totalPrice,
             quantity: 1
         }
+        // get all items from local storage to check for duplicate item
+        // save new product to local storage or update existing one
         localStorage.setItem(productObj.id, JSON.stringify(productObj));
     };
 
@@ -173,47 +176,49 @@ const ItemDetail = () => {
                             /> 24mm ... + $17.99 <br/ >
                         </div>
                     </div>
-                    <div className="buying_option">
-                        <h2>Select Finish:</h2>
-                        <input 
-                            type="radio" 
-                            name="product_finish"
-                            onChange={ () => addOption('finish', 'glossy', 0) } 
-                        /> glossy ....... + $0.00 <br/ >
-                        <input 
-                            type="radio" 
-                            name="product_finish"
-                            onChange={ () => addOption('finish', 'matte', 0) }  
-                        /> matte ....... + $0.00 <br/ >
-                        <input 
-                            type="radio" 
-                            name="product_finish"
-                            onChange={ () => addOption('finish', 'satin', 4.99) } 
-                        /> satin .......... + $4.99 <br/ >
-                        <input 
-                            type="radio" 
-                            name="product_finish"
-                            onChange={ () => addOption('finish', 'metallic', 4.99) } 
-                        /> metallic ... + $4.99 <br/ >
-                    </div>
-                    <div className="buying_option add_to_cart">
-                        <p>Total price:</p>
-                        <h2>${totalPrice}</h2>
-                        <div onClick={ addToCart }>
-                            {
-                                !size || !thickness || !finish ?
-                                <div className="button">
-                                    select size, thickness and finish
-                                </div>
-                                :
-                                <Link to="/shopping_cart">
+                    <div>
+                        <div className="buying_option">
+                            <h2>Select Finish:</h2>
+                            <input 
+                                type="radio" 
+                                name="product_finish"
+                                onChange={ () => addOption('finish', 'glossy', 0) } 
+                            /> glossy ....... + $0.00 <br/ >
+                            <input 
+                                type="radio" 
+                                name="product_finish"
+                                onChange={ () => addOption('finish', 'matte', 0) }  
+                            /> matte ....... + $0.00 <br/ >
+                            <input 
+                                type="radio" 
+                                name="product_finish"
+                                onChange={ () => addOption('finish', 'satin', 4.99) } 
+                            /> satin .......... + $4.99 <br/ >
+                            <input 
+                                type="radio" 
+                                name="product_finish"
+                                onChange={ () => addOption('finish', 'metallic', 4.99) } 
+                            /> metallic ... + $4.99 <br/ >
+                        </div>
+                        <div className="buying_option add_to_cart">
+                            <p>Total price:</p>
+                            <h2>${totalPrice}</h2>
+                            <div onClick={ addToCart }>
+                                {
+                                    !size || !thickness || !finish ?
                                     <div className="button">
                                         ADD TO CART
                                     </div>
-                                </Link> 
-                            }
-                        </div>
-                    </div>                          
+                                    :
+                                    <Link to="/shopping_cart">
+                                        <div className="button">
+                                            ADD TO CART
+                                        </div>
+                                    </Link> 
+                                }
+                            </div>
+                        </div>  
+                    </div>                        
                 </div>
             </div>
         </div>

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 const Intro = () => {
     return (
-        <div className="xs-w-90 xs-m-t-10 xs-m-b-10">
+        <div className="xs-w-90 s-w-80 xs-m-t-10 xs-m-b-10 m-m-b-5 m-m-t-5 m-cw">
             <h1 className="xs-fs-2em xs-m-b-5">High resolution aluminium prints have never been more affordable!</h1>
             <p className="disclaimer xs-m-b-5"> 
                 This is only mock website. You cannot buy or sell anything here. No

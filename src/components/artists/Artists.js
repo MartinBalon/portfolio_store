@@ -93,17 +93,13 @@ const Artists = () => {
 
     return (
         <div className="container">
-            <div className="xs-w-90">
-                <h1 className="xs-fs-2em xs-m-t-5 xs-m-b-5">Artists</h1>
-                {artistsToShow.map((artist) => (
-                    <Artist 
-                        data={artist} 
-                        key={artist.id}
-                    />
-                ))}
+            <div className="xs-w-90 s-w-80 m-w-100" id="artists">
+                <div className="clearfix m-cw artists-container">
+                    { artistsToShow.map(artist => <Artist data={ artist } key={ artist.id } />) }
+                </div>
                 {
                     numberOfArtists < filteredArtists.length ?
-                    <div className="xs-m-b-20">
+                    <div className="xs-m-b-10 xs-m-t-10 m-m-t-5 m-m-b-5">
                         <div 
                             className="button xs-w-180px" 
                             onClick={ loadMoreArtists }

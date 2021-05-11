@@ -121,7 +121,7 @@ const Register = () => {
     
     return (
         <div className="container">
-            <div className="xs-w-80 xs-m-t-10 xs-m-b-10">
+            <div className="xs-w-80 m-w-70 m-w-60 xs-m-t-10 xs-m-b-10 m-m-t-5 m-m-b-5 m-w-380px">
                 <label htmlFor="first_name">First name:</label>
                 <span className="warning_message">{firstName.reason}</span>
                 <input 

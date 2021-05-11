@@ -8,7 +8,7 @@ const Item = ({ data }) => {
     const link = `/product/${ data.id }`;
   
     return (
-        <div className="item xs-w-90 xs-m-t-5 xs-m-b-5">
+        <div className="item xs-m-t-5 xs-m-b-5 m-t-10px m-b-10px">
             <h2>{ data.name }</h2>
             <img src={ imagePath } alt={ imageAlt } />
             <div className="clearfix xs-p-14px">

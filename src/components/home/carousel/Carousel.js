@@ -80,32 +80,44 @@ const moveSlide = (elementId, leftPercent, translatePercent, zindex, timing) => 
 const Carousel = () => {
     return (
         <div id="carousel">
-            <img src="/img/logo/arrow_left.svg" id="arrow_left" alt="arrow left logo" onClick={() => changeSlide('left')} />
-            <img src="/img/logo/arrow_right.svg" id="arrow_right" alt="arrow right logo" onClick={() => changeSlide('right')} />
+            <img 
+                src="/img/logo/arrow_left.svg" 
+                id="arrow_left" 
+                alt="arrow left logo" 
+                onClick={ () => changeSlide('left') } 
+            />
+            <img 
+                src="/img/logo/arrow_right.svg" 
+                id="arrow_right" 
+                alt="arrow right logo" 
+                onClick={ () => changeSlide('right') } 
+            />
             <div id="circles">
                 <div id="circles_container">
-                {slides.map((slide) => 
+                { slides.map(slide => 
                     slide.id === 1 ? 
-                    <div key={slide.id} id={"circle" + slide.id} className="circle circle_active"></div>
+                    <div key={ slide.id } id={ "circle" + slide.id } className="circle circle_active">
+                    </div>
                     : 
-                    <div key={slide.id} id={"circle" + slide.id} className="circle"></div>
+                    <div key= {slide.id } id={ "circle" + slide.id } className="circle">
+                    </div>
                 )} 
                 </div>
             </div>
-            {slides.map(slide =>(
-                <div id={slide.id} key={slide.id} className="slide" style={{  
-                    backgroundColor: `${slide.backgroundColor}`
+            { slides.map(slide =>(
+                <div id={ slide.id } key={ slide.id } className="slide" style={{  
+                    backgroundColor: `${ slide.backgroundColor }`
                 }}>
                     <div>
-                        <h1 style={{color: `${slide.color}`}}>{slide.h1}</h1>
+                        <h1 style={{ color: `${ slide.color }` }}>{ slide.h1 }</h1>
                         {
                             windowWidth <= 450 ?
-                            <img src={slide.imgSmall} alt={slide.h1} className="slideImg" />
+                            <img src={ slide.imgSmall } alt={ slide.h1 } className="slideImg" />
                             :
-                            <img src={slide.imgLarge} alt={slide.h1} className="slideImg" />
+                            <img src={ slide.imgLarge } alt={ slide.h1 } className="slideImg" />
                         }
-                        <p style={{color: `${slide.color}`}}>{slide.p}</p>
-                        <a href={slide.a} target="_blank" rel="noreferrer">DISCOVER MORE</a>
+                        <p style={{ color: `${ slide.color }` }}>{ slide.p }</p>
+                        <a href={ slide.a } target="_blank" rel="noreferrer">DISCOVER MORE</a>
                     </div>
                 </div>
             ))}
