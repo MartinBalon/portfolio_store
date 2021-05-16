@@ -14,16 +14,24 @@ const Artists = () => {
         });
     }, []);
 
+    // get users window width and decide how many artist to show
+    const windowWidth = window.innerWidth;
+    let artistsToShow = 3;
+    if (windowWidth > 620 && windowWidth <= 1366) {
+        artistsToShow = 4;
+    } 
+
     if (artists.length > 0) {
-        // create three random IDs
-        while (randomArtistsId.length < 3) {
+        // create random IDs
+        while (randomArtistsId.length < artistsToShow) {
             let randomIndex = Math.floor(Math.random() * artists.length);
+            // check for duplicate ids
             if (randomArtistsId.indexOf(randomIndex) === -1) {
                 randomArtistsId.push(randomIndex);
             }
         }
-        // populate array with three random artists
-        for (let i = 0; i < 3; i++) {
+        // populate array with random artists
+        for (let i = 0; i < artistsToShow; i++) {
             randomArtists.push(artists[randomArtistsId[i]]);
         }
     }

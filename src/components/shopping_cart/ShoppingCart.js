@@ -92,6 +92,8 @@ const ShoppingCart = ({ changePrice, changeProducts }) => {
         // update localStorageData state so we can re-render the shopping cart
         setLocalStorageData(Object.entries(localStorage));
     };
+
+    const emptyCart = products && products.length === 0 ? { margin: '10px auto', float: 'none' } : null;
     
     return (
         <div className="container">
@@ -133,13 +135,16 @@ const ShoppingCart = ({ changePrice, changeProducts }) => {
                                 </div>
                             </div>
                         </div>
-                    ))
-                    :
-                    <div className="sc_container sc_empty">
-                        <h2>Your shopping cart is empty</h2>
-                    </div> }
+                    )) : null }
                     
-                    <div className="sc_container sc_summary">
+                    <div className="sc_container sc_summary" style={ emptyCart }>
+                        { products.length === 0 ?
+                            <div className="sc_empty" style={{ textAlign: 'center'}}>
+                                <h2>Your shopping cart is empty</h2>
+                            </div>
+                            :
+                            null                      
+                        }
                         <div className="sc_price">
                             <div className="clearfix">
                                 <h4 className="left">Subtotal:</h4>

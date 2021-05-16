@@ -44,86 +44,90 @@ const ContactUs = () => {
 
     return (
         <div className="container">
-            <div className="clearfix xs-w-80 m-w-70 m-w-60 xs-m-t-10 m-m-t-5 m-w-380px">
-                <div className="xs-m-b-5">
-                    <h2 className="bold">Head Office:</h2>
-                    <p>Teplicka 1a</p>
-                    <p>Prague</p>
-                    <p>190 00</p>
-                    <p>The Czech Republic</p>
-                    <p>+420 123 456 789</p>
-                    <p>noinfo@aluminiumpixels.com</p>
+            <div className="clearfix contact-us">
+                <div className="clearfix xs-w-80 m-w-70 m-w-60 xs-m-t-10 m-m-t-5 m-w-380px">
+                <h1 className="xs-fs-12em">Contact details:</h1>
+                    <div className="xs-m-b-5">
+                        <h2 className="bold">Head Office:</h2>
+                        <p>Teplicka 1a</p>
+                        <p>Prague</p>
+                        <p>190 00</p>
+                        <p>The Czech Republic</p>
+                        <p>+420 123 456 789</p>
+                        <p>noinfo@aluminiumpixels.com</p>
+                    </div>
+                    <div className="xs-m-b-5">
+                        <h2 className="bold">Factory:</h2>
+                        <p>Prazska 1b</p>
+                        <p>Teplice</p>
+                        <p>415 01</p>
+                        <p>The Czech Republic</p>
+                        <p>+420 987 654 321</p>
+                        <p>noinfo@aluminiumpixels.com</p>
+                    </div>
                 </div>
-                <div className="xs-m-b-5">
-                    <h2 className="bold">Factory:</h2>
-                    <p>Prazska 1b</p>
-                    <p>Teplice</p>
-                    <p>415 01</p>
-                    <p>The Czech Republic</p>
-                    <p>+420 987 654 321</p>
-                    <p>noinfo@aluminiumpixels.com</p>
-                </div>
-            </div>
-            <div className="xs-w-80 m-w-70 m-w-60 xs-m-t-10 m-m-t-5 m-w-380px">
-                <h1 className="xs-fs-12em">Leave us a message:</h1>
-                <br />
-                <label htmlFor="name">
-                    First and last name:
-                    <span className="warning">{ name.reason }</span>
-                </label>
-                <input 
-                    type="text" 
-                    name="name"
-                    value={ name.value }
-                    onChange={ (event) => handleChange(event) } 
-                />
-                <br />
-                <label htmlFor="email">
-                    Email:
-                    <span className="warning">{ email.reason }</span>
-                </label>
-                <input 
-                    type="text" 
-                    name="email"
-                    value={ email.value }
-                    onChange={ (event) => handleChange(event) }  
-                />
-                <br />
-                <label htmlFor="message">
-                    Message:
-                    <span className="warning">{ message.reason }</span>
-                </label>
-                <textarea 
-                    name="message" 
-                    rows="10"
-                    value={ message.value }
-                    onChange={ (event) => handleChange(event) }
-                >
-                </textarea>
 
-                <br /><br />
+                <div className="xs-w-80 m-w-70 m-w-60 xs-m-t-10 m-m-t-5 m-w-380px">
+                    <h1 className="xs-fs-12em">Leave us a message:</h1>
+                    <br />
+                    <label htmlFor="name">
+                        First and last name:
+                        <span className="warning">{ name.reason }</span>
+                    </label>
+                    <input 
+                        type="text" 
+                        name="name"
+                        value={ name.value }
+                        onChange={ (event) => handleChange(event) } 
+                    />
+                    <br />
+                    <label htmlFor="email">
+                        Email:
+                        <span className="warning">{ email.reason }</span>
+                    </label>
+                    <input 
+                        type="text" 
+                        name="email"
+                        value={ email.value }
+                        onChange={ (event) => handleChange(event) }  
+                    />
+                    <br />
+                    <label htmlFor="message">
+                        Message:
+                        <span className="warning">{ message.reason }</span>
+                    </label>
+                    <textarea 
+                        name="message" 
+                        rows="10"
+                        value={ message.value }
+                        onChange={ (event) => handleChange(event) }
+                    >
+                    </textarea>
 
-                <div className="xs-m-b-10">
-                    {
-                        name.valid && email.valid && message.valid ?
-                        <Link to={{
-                            pathname: '/send_message',
-                            data: {
-                                name: name.value,
-                                email: email.value,
-                                message: message.value
-                            }
-                        }}
-                        >
+                    <br /><br />
+
+                    <div className="xs-m-b-10">
+                        {
+                            name.valid && email.valid && message.valid ?
+                            <Link to={{
+                                pathname: '/send_message',
+                                data: {
+                                    name: name.value,
+                                    email: email.value,
+                                    message: message.value
+                                }
+                            }}
+                            >
+                                <div className="form_button">
+                                    Send message
+                                </div>
+                            </Link>
+                            :
                             <div className="form_button">
                                 Send message
                             </div>
-                        </Link>
-                        :
-                        <div className="form_button">
-                            Send message
-                        </div>
-                    }
+                        }
+                    </div>
                 </div>
             </div>
         </div>

@@ -197,6 +197,11 @@ table {
 	font-size: 2em;
 }
 /******************************/
+html {
+	position: relative;
+  min-height: 100%;	
+}
+
 body {
 	font-family: 'Dosis', sans-serif;
 	line-height: 1.2;
@@ -206,6 +211,7 @@ body {
 .container {
 	max-width: 1600px;
 	margin: 0 auto;
+	margin-bottom: 560px;
 }
 
 a {
@@ -394,8 +400,11 @@ header {
 footer {
 	background: rgb(50, 50, 50);
 	padding: 20px;
-	position: relative;
 	z-index: 99;
+	position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
 }
 
 footer a, footer p {
@@ -938,6 +947,7 @@ input {
 #credit_card_container {
 	margin-top: 5px;
 	margin-bottom: 10px;
+	max-width: 300px;
 }
 
 #credit_card_container .icons {
@@ -1199,7 +1209,9 @@ input {
 
 	/* carousel */
 	#carousel {
+		margin-top: 5%;
 		height: 550px;
+		width: calc(2* 290px + 4* 10px);
 	}
 
 	.slideImg {
@@ -1251,13 +1263,26 @@ input {
 @media (min-width: 700px) {
 	/* Shopping Cart */
 	.sc-inner {
-		width: 640px;
+		max-width: 640px;
 		margin: 0 auto;
 	}
 
 	.sc-inner .sc_container {
 		float: left;
 		margin: 10px;
+	}
+
+	.payment_left, .payment_right {
+		width: 48%;
+		float: left;
+	}
+
+	.payment_right {
+		margin-left: 4%;
+	}
+
+	.payment-wraper {
+		max-width: 680px;
 	}
 }
 
@@ -1284,6 +1309,14 @@ input {
 }
 
 @media (min-width: 1000px) {
+	.l-w-50 {
+		width: 50%;
+	}
+
+	.l-m-t-5 {
+		margin-top: 5%;
+	}
+
 	#carousel {
 		margin-top: 5%;
 	}
@@ -1311,19 +1344,27 @@ input {
 
 	/* Shopping Cart */
 	.sc-inner {
-		width: 960px;
+		max-width: 960px;
 		margin: 0 auto;
 	}
 }
 
 @media (min-width: 1366px) {
+	.xl-w-90 {
+		width: 90%;
+	}
+
 	.l-w-30 {
 		width: 30%;
 		margin: 0 1.66%;
 	}
 
-	.items-container, .m-cw {
+	.items-container, .m-cw, #carousel {
 		width: calc(3* 290px + 6* 10px); /* 3 x width of item + 6 x margin*/
+	}
+
+	.item_background {
+    margin: 40px auto;
 	}
 
 	#filter {
@@ -1346,4 +1387,66 @@ input {
 		float: left;
 	}
 
+	.intro div {
+		width: 50%;
+		float: left;
+	}
+
+	.intro div:first-child {
+		padding-right: 30px;
+		font-size: 1.1em;
+	}
+
+	.intro div:last-child {
+		padding-left: 30px;
+	}
+
+	.disclaimer {
+		font-size: 1.2em;;
+	}
+
+	.about-us {
+		margin-bottom: 5%;
+	}
+
+	.about-us p {
+		float: left;
+	}
+
+	.container {
+		margin-bottom: 360px;
+	}
+
+	.contact-us {
+		max-width: 760px;
+		margin: 0 auto;
+	}
+
+	.contact-us h1 {
+		text-align: left;
+	}
+
+	.contact-us h2 {
+		margin-top: 5%;
+	}
+
+	.contact-us > div {
+		width: 50%;
+		float: left;
+	}
+
+	.checkout_left, .checkout_right {
+		float: left;
+	}
+
+	.checkout_left {
+		width: 40%;
+		margin-top: 140px;
+	}
+
+	.checkout_right {
+		width: 40%;
+		margin-left: 10%;
+		margin-top: 60px;
+	}
 }

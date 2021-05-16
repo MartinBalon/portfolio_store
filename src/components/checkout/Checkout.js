@@ -197,10 +197,10 @@ const Checkout = ({ changeOrder, customer }) => {
 
     return (
         <div className="container">
-            <div className="xs-w-80">
+            <div className="xs-w-80 m-w-60 l-w-50 xl-w-90 clearfix">
                 {
                     !customer ?
-                    <div className="xs-m-t-10">
+                    <div className="xs-m-t-10 m-m-t-5 checkout_left">
                         <h2 className="xs-m-b-2 center">
                             Are you an existing customer?
                         </h2>
@@ -221,7 +221,7 @@ const Checkout = ({ changeOrder, customer }) => {
                     :
                     <></>
                 }
-                <div className="xs-m-t-10">
+                <div className="xs-m-t-10 checkout_right">
                     {
                         !customer ?
                         <h1 className="xs-m-b-5">Finish checkout as a guest:</h1>
@@ -311,7 +311,7 @@ const Checkout = ({ changeOrder, customer }) => {
                             onChange={ (event) => handleChange(event.target.value, 'postCode') }
                         />        
                     </div>  
-                    <div className="xs-m-b-10">
+                    <div className="xs-m-b-10 m-m-b-5">
                         <p className="center xs-m-b-2">Proceed to payment and complete the order.</p>
                         {
                             checkIfValid() ?

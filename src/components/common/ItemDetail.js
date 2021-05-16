@@ -125,13 +125,11 @@ const ItemDetail = () => {
             price: totalPrice,
             quantity: 1
         }
-        // get all items from local storage to check for duplicate item
-        // save new product to local storage or update existing one
         localStorage.setItem(productObj.id, JSON.stringify(productObj));
     };
 
     return (
-        <div className="container">
+        <div className="container" style={{ maxWidth: '1920px' }}>
             <div className="item_container">
                 <div className="item_background">
                     <img 

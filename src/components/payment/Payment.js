@@ -127,43 +127,45 @@ const Payment = ({changeOrder, order}) => {
         <div className="container">
             {
                 customer ?
-                <div className="xs-w-90">
+                <div className="xs-w-90 clearfix payment-wraper">
                     <h1 className="xs-m-t-5 xs-m-b-5 xs-fs-16em">Summary of your order</h1>
-                    <div className="clearfix">
-                        <div className="xs-m-b-5">
-                            <h2 className="bold">Your contact details:</h2>
-                            <p>{ customer.firstName } { customer.lastName }</p>
-                            <p>{ customer.email }</p>
-                            <p>{ customer.phone }</p>
-                        </div>
-                        <div className="xs-m-b-5">
-                            <h2 className="bold">Delivery address:</h2>
-                            <p>{ customer.street }</p>
-                            <p>{ customer.town }</p>
-                            <p>{ customer.postCode }</p>
-                        </div>
-                    </div>
-                    <div className="payment_container">
-                        <h2 className="bold xs-m-b-2">Your order:</h2>                    
-                        {
-                            products.map((product, i) => (
-                                <ItemOrder product={ product } key={ i } />                          
-                            ))
-                        }
-                        <div className="clearfix xs-m-t-5 xs-m-b-5 bold">
-                            <div className="left">
-                                <h2>Subtotal:</h2>
-                                <h2>Shipment:</h2>
-                                <h2>Total:</h2>
+                    <div className="payment_left">
+                        <div className="clearfix">
+                            <div className="xs-m-b-5 m-m-b-2">
+                                <h2 className="bold">Your contact details:</h2>
+                                <p>{ customer.firstName } { customer.lastName }</p>
+                                <p>{ customer.email }</p>
+                                <p>{ customer.phone }</p>
                             </div>
-                            <div className="left xs-m-l-5">
-                                <h2>${ subtotal }</h2>
-                                <h2>${ shipment }</h2>
-                                <h2>${ totalPrice }</h2>
+                            <div className="xs-m-b-5">
+                                <h2 className="bold">Delivery address:</h2>
+                                <p>{ customer.street }</p>
+                                <p>{ customer.town }</p>
+                                <p>{ customer.postCode }</p>
                             </div>
                         </div>
+                        <div className="payment_container">
+                            <h2 className="bold xs-m-b-2">Your order:</h2>                    
+                            {
+                                products.map((product, i) => (
+                                    <ItemOrder product={ product } key={ i } />                          
+                                ))
+                            }
+                            <div className="clearfix xs-m-t-5 xs-m-b-5 bold">
+                                <div className="left">
+                                    <h2>Subtotal:</h2>
+                                    <h2>Shipment:</h2>
+                                    <h2>Total:</h2>
+                                </div>
+                                <div className="left xs-m-l-5">
+                                    <h2>${ subtotal }</h2>
+                                    <h2>${ shipment }</h2>
+                                    <h2>${ totalPrice }</h2>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div className="payment_container">
+                    <div className="payment_container payment_right">
                         <h2 className="bold">Choose your payment method:</h2>
                         <p className="warning">
                             Google pay &amp; Apple pay don't work. <br />
@@ -262,12 +264,12 @@ const Payment = ({changeOrder, order}) => {
                                         });
                                     }}
                                 >
-                                    <div className="button xs-w-100px">
+                                    <div className="button xs-w-100px" style={{ margin: '0' }}>
                                         Pay
                                     </div>
                                 </Link>
                                 :
-                                <div className="button xs-w-100px">
+                                <div className="button xs-w-100px" style={{ margin: '0' }}>
                                     Pay
                                 </div>
                             }
